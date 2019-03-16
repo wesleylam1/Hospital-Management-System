@@ -9,7 +9,7 @@ $db_conn = dbConnect();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
-    <link rel="stylesheet" href="./css/short_result_table.css" />
+    <link rel="stylesheet" href="./css/result_table.css" />
     <head>
         <title> Hospital Mgmt Sys </title>
     <style> 
@@ -122,58 +122,49 @@ $db_conn = dbConnect();
 
     <body>
         <div class="navbar">
-            <a href="home.php">Home</a>
+        <a href="home.php">Home</a>
             <a href="patientQuery.php">Patient Query</a>
+            <a href="equipmentQuery.php">Equipment Query</a>
+            <a href="maintenanceRecordQuery.php">Maintenance Record Query</a>
+            <a href="equipmentPurchaseSummary.php">Equipment Purchase Summary</a>
+            <a href="patientDiseaseSummary.php">Patient Disease Summary</a>
             <a href="patientList.php">Patient List</a>
         </div>
-            <div class="main">
-                <h6>Three tables will be generated for the given patient: treatment & prescription history, appointment table and disease table.</h6>
-                <h6>Please enter the patient id below:</h6>
-                <form method= "GET" action="patientQuery.php">
-                    <p><font size="3"> Patient ID: <input type="text" value="" name="patientid">
-                    <p><input type="submit" value="submit" name="patientquery"></p>
+        <div class="main">
+                <h6>This query will generate a list of patients who are diagnosed with the given disease. 
+                </h6>
+
+                <h6>Please enter the disease name:</h6>
+                <form method= "GET" action="patientDiseaseSummary.php">
+                    <p><font size="2"> Disease name: <input type="text" value="" name="diseasenm"> 
+                    <p><input type="submit" value="submit" name="patientdiseasequery"></p>
                 </form>
+
+                <h6></br>The table below summarizes the number of patients diagnosed with each disease.</h6>
+                <h5><b>Patient Disease Summary</b></h5>
                 
-                <h5></br><b>Patient Query Result</b></h5>
-                <?php 
-                    $pid = $_GET['patientid'];
-                    echo "Patient ID: ".$pid."</br>"; 
-                ?>
-
-                <h6><b>Table 1: Treatment & Prescription History</b></h6>
                 <?php
-                    echo "note: we can change cols below, depends on what we wanna output </br>";
-                    $cols1 = array("Date", "Medical Notes", "Drug Name", "Dosage", "Refills", "Total Amount");
                     echo "TODO: need to call fn to get data for table and store as result";
-                    //$result1 = !!!;
-                    $result1 = NULL;
-
-                    printTable($result1, $cols1);
+                    //$table1 = !!!;
+                    $table1 = NULL;
+                    printTable($table1, array("Disease Name", "Number of Patients"));
                 ?>
 
-                <h6></br><b>Table 2: Appointments</b></h6>
+                <h5></br><b>List of Patients</b></h5>
                 <?php
-                    echo "note: we can change cols below, depends on what we wanna output </br>";
-                    $cols2 = array("Start Time", "End Time", "Doctor ID", "Patient ID", "Room Department", "Room ID");
+                    $diseasenm = $_GET['diseasenm'];
+                    echo "Input Disease Name: ".$diseasenm."</br>";
                     echo "TODO: need to call fn to get data for table and store as result";
-                    //$result2 = !!!;
-                    $result2 = NULL;
-
-                    printTable($result2, $cols2);
+                    echo "note: we can change cols below, depends on what we wanna output";
+                    $cols = array("Patient ID", "Name", "Age", "Status");
+                    $table2 = NULL;
+                    printTable($table2, $cols);
                 ?>
 
-                <h6></br><b>Table 3: Diseases</b></h6>
-                <?php
-                    echo "note: we can change cols below, depends on what we wanna output </br>";
-                    $cols3 = array("Disease Name", "Status");
-                    echo "TODO: need to call fn to get data for table and store as result";
-                    //$result3 = !!!;
-                    $result3 = NULL;
 
-                    printTable($result3, $cols3);
-                ?>
+        </div>
+            
 
-            </div>
         </div>
 
         <div class="footer">

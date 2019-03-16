@@ -121,17 +121,24 @@ $db_conn = dbConnect();
 
     <body>
         <div class="navbar">
-            <a href="home_doc.php">Home</a>
+            <a href="home.php">Home</a>
             <a href="patientQuery.php">Patient Query</a>
-            <a href="#">Personal Info</a>
-            <a href="#" class="right">Logout</a>
+            <a href="patientUpdate.php">Patient Update</a>
+            <a href="patientList.php">Patient List</a>
         </div>
             <div class="main">
-                <h5>Hello Dr.___!</h5>
-                <h6>Your appointment calendar:</h6>
-                <p>If I have time, I'll add the appointment calendar below.. <br/>
-                   if not then I'll just put a table for appointments associated for this doctor.</p>
-                <div class="fakeimg" style="height:200px;">Calendar</div>
+                <h6>Insert Appointment:</h6>
+                <p>//TODO: add fields/ boxes here for update.. </br>
+                    add form here..</p>
+                </br>
+                <h6>Insert Treatment History:</h6>
+                <p>//TODO: add fields/ boxes here for update.. </br>
+                    add form here..</p>
+                </br>
+                <h6>Update Disease:</h6>
+                <p>//TODO: add fields/ boxes here for update.. </br>
+                    add form here..</p>
+
             </div>
         </div>
 
@@ -141,3 +148,5 @@ $db_conn = dbConnect();
     </body>
 
 </html>
+
+

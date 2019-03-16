@@ -9,7 +9,7 @@ $db_conn = dbConnect();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
-    <link rel="stylesheet" href="./css/short_result_table.css" />
+    <link rel="stylesheet" href="./css/patient_list.css" />
     <head>
         <title> Hospital Mgmt Sys </title>
     <style> 
@@ -103,14 +103,6 @@ $db_conn = dbConnect();
         flex-direction: column;
     }
     }
-
-    /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-    @media screen and (max-width: 400px) {
-    .navbar a {
-        float: none;
-        width:100%;
-    }
-    }
     </style>
 
     <div class = "header">
@@ -123,54 +115,41 @@ $db_conn = dbConnect();
     <body>
         <div class="navbar">
             <a href="home.php">Home</a>
-            <a href="patientQuery.php">Patient Query</a>
             <a href="patientList.php">Patient List</a>
         </div>
             <div class="main">
-                <h6>Three tables will be generated for the given patient: treatment & prescription history, appointment table and disease table.</h6>
-                <h6>Please enter the patient id below:</h6>
-                <form method= "GET" action="patientQuery.php">
-                    <p><font size="3"> Patient ID: <input type="text" value="" name="patientid">
-                    <p><input type="submit" value="submit" name="patientquery"></p>
+                <h6>This query will generate a table of personal info for all patients in the system.</h6>
+                <h6>Please select the fields for the result table:</h6>
+                <form method= "GET" action="patientList.php">
+                    <p><input type="checkbox" name="checklist[]" value="id" checked> patient id </br>
+                    <input type="checkbox" name="checklist[]" value="name" checked> name </br>
+                    <input type="checkbox" name="checklist[]" value="phone"> phone number </br>
+                    <input type="checkbox" name="checklist[]" value="address"> address </br>
+                    <input type="checkbox" name="checklist[]" value="age"> age </br>
+                    <input type="checkbox" name="checklist[]" value="care_card_num"> care card number </br>
+                    <input type="checkbox" name="checklist[]" value="emergency_contact_num"> emergency contact number </br>
+                    </p>
+                    <p><input type="submit" value="submit" name="patientlistquery"></p>
                 </form>
-                
-                <h5></br><b>Patient Query Result</b></h5>
-                <?php 
-                    $pid = $_GET['patientid'];
-                    echo "Patient ID: ".$pid."</br>"; 
+
+                <?php
+                    $cols = $_GET[checklist];
+                    if (isset($_GET[checklist])) {
+                        echo "You selected the following fields: &nbsp";
+                        foreach ($cols as $c) {
+                            echo $c."&nbsp&nbsp";
+                        }
+                    } else {
+                        echo "(You must select at least one field)";
+                    }
                 ?>
 
-                <h6><b>Table 1: Treatment & Prescription History</b></h6>
+                <h5></br><b>Patient Personal Info Query Result</b></h5>
                 <?php
-                    echo "note: we can change cols below, depends on what we wanna output </br>";
-                    $cols1 = array("Date", "Medical Notes", "Drug Name", "Dosage", "Refills", "Total Amount");
                     echo "TODO: need to call fn to get data for table and store as result";
-                    //$result1 = !!!;
-                    $result1 = NULL;
-
-                    printTable($result1, $cols1);
-                ?>
-
-                <h6></br><b>Table 2: Appointments</b></h6>
-                <?php
-                    echo "note: we can change cols below, depends on what we wanna output </br>";
-                    $cols2 = array("Start Time", "End Time", "Doctor ID", "Patient ID", "Room Department", "Room ID");
-                    echo "TODO: need to call fn to get data for table and store as result";
-                    //$result2 = !!!;
-                    $result2 = NULL;
-
-                    printTable($result2, $cols2);
-                ?>
-
-                <h6></br><b>Table 3: Diseases</b></h6>
-                <?php
-                    echo "note: we can change cols below, depends on what we wanna output </br>";
-                    $cols3 = array("Disease Name", "Status");
-                    echo "TODO: need to call fn to get data for table and store as result";
-                    //$result3 = !!!;
-                    $result3 = NULL;
-
-                    printTable($result3, $cols3);
+                    //$result = !!!;
+                    $result = NULL;
+                    printTable($result, $cols);
                 ?>
 
             </div>

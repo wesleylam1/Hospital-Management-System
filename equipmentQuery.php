@@ -121,27 +121,21 @@ $db_conn = dbConnect();
 
     <body>
         <div class="navbar">
-            <a href="home_doc.php">Home</a>
+        <a href="home.php">Home</a>
             <a href="patientQuery.php">Patient Query</a>
-            <a href="#">Personal Info</a>
-            <a href="#" class="right">Logout</a>
+            <a href="equipmentQuery.php">Equipment Query</a>
+            <a href="maintenanceRecordQuery.php">Maintenance Record Query</a>
+            <a href="equipmentPurchaseSummary.php">Equipment Purchase Summary</a>
+            <a href="patientDiseaseSummary.php">Patient Disease Summary</a>
+            <a href="patientList.php">Patient List</a>
         </div>
             <div class="main">
-                <h2>Welcome to the Patient Query Portal</h2>
-                <p>Patient ID: ___ <br/>
-                   Pateint Name: ___</p>
-
-                <h6>Table 1: Treatment History</h6>
-                <p> **need to add features for adding/updating treatment history** </p>
-
-                <h6>Table 2: Prescriptions</h6>
-                <p> **need to add features for adding/updating prescriptions** </p>
-
-                <h6>Table 3: Diseases</h6>
-                <form method= "POST" action="patientResult.php">
-                    <p><font size="2"> Disease old name: <input type="text" value="" name="oldName"></p>
-                    <p><font size="2"> Disease new name: <input type="text" value="" name="newName">
-                    <p><input type="submit" value="submit" name="editDisease"></p>
+                <h6>A table containing the equipment info will be generated in this query. 
+                The admin is able to update, insert and delete the equipment records.</h6>
+                <h6>Please enter the equipment id below:</h6>
+                <form method= "GET" action="equipmentQuery.php">
+                    <p><font size="2"> Equipment ID: <input type="text" value="" name="equipmentid">
+                    <p><input type="submit" value="submit" name="equipmentquery"></p>
                 </form>
             </div>
         </div>
@@ -152,3 +146,5 @@ $db_conn = dbConnect();
     </body>
 
 </html>
+
+

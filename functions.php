@@ -81,5 +81,32 @@ function executeBoundSQL($cmdstr, $list) {
 
 }
 
+function printTable($resultFromSQL, $namesOfColumnsArray)
+{
+    echo "<table>";
+    echo "<tr>";
+    // iterate through the array and print the string contents
+    foreach ($namesOfColumnsArray as $name) {
+        echo "<th>$name</th>";
+    }
+    echo "</tr>";
 
+    while ($row = OCI_Fetch_Array($resultFromSQL, OCI_BOTH)) {
+        echo "<tr>";
+        $string = "";
+
+        // iterates through the results returned from SQL query and
+        // creates the contents of the table
+        for ($i = 0; $i < sizeof($namesOfColumnsArray); $i++) {
+            $string .= "<td>" . $row["$i"] . "</td>";
+        }
+        echo $string;
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+// JC: test function, to remove...
+function testfun1($x, $y) {
+    return $y;
+}
 ?>
