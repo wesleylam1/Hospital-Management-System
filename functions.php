@@ -105,8 +105,9 @@ function printTable($resultFromSQL, $namesOfColumnsArray)
     }
     echo "</table>";
 }
+
 // JC: test function, to remove...
 function testfun1($x, $y) {
-    return $y;
+    return array("val1", "val2", "val3");
 }
 ?>

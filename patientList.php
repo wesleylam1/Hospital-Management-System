@@ -10,6 +10,8 @@ $db_conn = dbConnect();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link rel="stylesheet" href="./css/patient_list.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <head>
         <title> Hospital Mgmt Sys </title>
     <style> 
@@ -103,10 +105,51 @@ $db_conn = dbConnect();
         flex-direction: column;
     }
     }
+
+    /*add drop down list in navbar*/
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+    .dropdown .dropbtn {
+        font-size: 16px;  
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
     </style>
 
-    <div class = "header">
-        <h1>Hospital Management System</h1>
+<div class = "header">
+        <h1><b><a href= "home.php" style="text-decoration:none;">Hospital Management System </a></b></h1>
         <p>UBC CPSC304 Project </p>
     </div>
 
@@ -114,14 +157,24 @@ $db_conn = dbConnect();
 
     <body>
         <div class="navbar">
-            <a href="home.php">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">User Classes 
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                    <div class="dropdown-content">
+                        <a href="doctor.php">Doctor</a>
+                        <a href="nurse.php">Nurse</a>
+                        <a href="admin.php">Admin</a>
+                    </div>
+            </div>
             <a href="patientList.php">Patient List</a>
         </div>
             <div class="main">
+                <h3><b>Patient List Query</b><h3>
                 <h6>This query will generate a table of personal info for all patients in the system.</h6>
                 <h6>Please select the fields for the result table:</h6>
                 <form method= "GET" action="patientList.php">
-                    <p><input type="checkbox" name="checklist[]" value="id" checked> patient id </br>
+                    <p><font size="2" color=black><input type="checkbox" name="checklist[]" value="id" checked> patient id </br>
                     <input type="checkbox" name="checklist[]" value="name" checked> name </br>
                     <input type="checkbox" name="checklist[]" value="phone"> phone number </br>
                     <input type="checkbox" name="checklist[]" value="address"> address </br>
@@ -129,7 +182,7 @@ $db_conn = dbConnect();
                     <input type="checkbox" name="checklist[]" value="care_card_num"> care card number </br>
                     <input type="checkbox" name="checklist[]" value="emergency_contact_num"> emergency contact number </br>
                     </p>
-                    <p><input type="submit" value="submit" name="patientlistquery"></p>
+                    <input type="submit" value="submit" name="patientlistquery"></p>
                 </form>
 
                 <?php
@@ -146,7 +199,7 @@ $db_conn = dbConnect();
 
                 <h5></br><b>Patient Personal Info Query Result</b></h5>
                 <?php
-                    echo "TODO: need to call fn to get data for table and store as result";
+                    echo "TODO: need to call fn to get data for table";
                     //$result = !!!;
                     $result = NULL;
                     printTable($result, $cols);

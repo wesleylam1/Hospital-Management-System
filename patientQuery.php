@@ -10,6 +10,8 @@ $db_conn = dbConnect();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link rel="stylesheet" href="./css/short_result_table.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <head>
         <title> Hospital Mgmt Sys </title>
     <style> 
@@ -111,27 +113,79 @@ $db_conn = dbConnect();
         width:100%;
     }
     }
+
+    /*add drop down list in navbar*/
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+    .dropdown .dropbtn {
+        font-size: 16px;  
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
     </style>
 
     <div class = "header">
-        <h1>Hospital Management System</h1>
-        <p>UBC CPSC304 Project </p>
-    </div>
+            <h1><b><a href= "home.php" style="text-decoration:none;">Hospital Management System </a></b></h1>
+            <p>UBC CPSC304 Project </p>
+        </div>
 
-    </head>
+        </head>
 
-    <body>
-        <div class="navbar">
-            <a href="home.php">Home</a>
+        <body>
+            <div class="navbar">
+                <div class="dropdown">
+                    <button class="dropbtn">User Classes 
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                        <div class="dropdown-content">
+                            <a href="doctor.php">Doctor</a>
+                            <a href="nurse.php">Nurse</a>
+                            <a href="admin.php">Admin</a>
+                        </div>
+                </div>
             <a href="patientQuery.php">Patient Query</a>
             <a href="patientList.php">Patient List</a>
         </div>
             <div class="main">
+                <h3><b>Patient Query</b><h3>
                 <h6>Three tables will be generated for the given patient: treatment & prescription history, appointment table and disease table.</h6>
                 <h6>Please enter the patient id below:</h6>
                 <form method= "GET" action="patientQuery.php">
-                    <p><font size="3"> Patient ID: <input type="text" value="" name="patientid">
-                    <p><input type="submit" value="submit" name="patientquery"></p>
+                    <p><font size="3" color=black> Patient ID: 
+                        <input type="number" name="patientid">
+                        <input type="submit" value="submit" name="patientquery"></p>
                 </form>
                 
                 <h5></br><b>Patient Query Result</b></h5>
@@ -143,7 +197,7 @@ $db_conn = dbConnect();
                 <h6><b>Table 1: Treatment & Prescription History</b></h6>
                 <?php
                     echo "note: we can change cols below, depends on what we wanna output </br>";
-                    $cols1 = array("Date", "Medical Notes", "Drug Name", "Dosage", "Refills", "Total Amount");
+                    $cols1 = array("Date", "Medical Notes", "Drug Name", "Dosage", "Refills", "Total Amount", "Duration (days)", "Drug Price");
                     echo "TODO: need to call fn to get data for table and store as result";
                     //$result1 = !!!;
                     $result1 = NULL;
@@ -153,7 +207,7 @@ $db_conn = dbConnect();
 
                 <h6></br><b>Table 2: Appointments</b></h6>
                 <?php
-                    echo "note: we can change cols below, depends on what we wanna output </br>";
+                    echo "note: we can change cols below, depends on what we wanna output (like do we want doctor and patient names instead of id's?)</br>";
                     $cols2 = array("Start Time", "End Time", "Doctor ID", "Patient ID", "Room Department", "Room ID");
                     echo "TODO: need to call fn to get data for table and store as result";
                     //$result2 = !!!;
@@ -166,7 +220,7 @@ $db_conn = dbConnect();
                 <?php
                     echo "note: we can change cols below, depends on what we wanna output </br>";
                     $cols3 = array("Disease Name", "Status");
-                    echo "TODO: need to call fn to get data for table and store as result";
+                    echo "TODO: need to call fn to get data for table";
                     //$result3 = !!!;
                     $result3 = NULL;
 

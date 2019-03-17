@@ -9,6 +9,9 @@ $db_conn = dbConnect();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link rel="stylesheet" href="./css/short_result_table.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <head>
         <title> Hospital Mgmt Sys </title>
     <style> 
@@ -110,10 +113,51 @@ $db_conn = dbConnect();
         width:100%;
     }
     }
+
+    /*add drop down list in navbar*/
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+    .dropdown .dropbtn {
+        font-size: 16px;  
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
     </style>
 
     <div class = "header">
-        <h1>Hospital Management System</h1>
+        <h1><b><a href= "home.php" style="text-decoration:none;">Hospital Management System </a></b></h1>
         <p>UBC CPSC304 Project </p>
     </div>
 
@@ -121,7 +165,16 @@ $db_conn = dbConnect();
 
     <body>
         <div class="navbar">
-        <a href="home.php">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">User Classes 
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                    <div class="dropdown-content">
+                        <a href="doctor.php">Doctor</a>
+                        <a href="nurse.php">Nurse</a>
+                        <a href="admin.php">Admin</a>
+                    </div>
+            </div>
             <a href="patientQuery.php">Patient Query</a>
             <a href="equipmentQuery.php">Equipment Query</a>
             <a href="maintenanceRecordQuery.php">Maintenance Record Query</a>
@@ -130,7 +183,52 @@ $db_conn = dbConnect();
             <a href="patientList.php">Patient List</a>
         </div>
             <div class="main">
-                //TODO: inputs & outputs
+                <h3><b>Maintenance Records Query</b><h3>
+                <h6>This query will generate all maintenance records for the given equipment. 
+                The admin is able to add new maintenance record.</h6>
+                <h6>Please enter the equipment id below:</h6>
+                <form method= "GET" action="maintenanceRecordQuery.php">
+                    <p><font size="3" color=black> Equipment ID: 
+                        <input type="number" name="equipid">
+                    <input type="submit" value="get records" name="mrecordquery"></p>
+                </form>
+                </br> <!-- Render maintenance records for the selected equipment -->
+                <h6><b>Maintenance Reocrds:</b></h6>
+                <?php
+                    $epid = $_GET['equipid'];
+                    echo "Equipment ID: ".$epid."</br>";
+                    echo "TODO: need to call proper fn to render record table</br>";
+                    echo "pending col's to render...";
+                    $result = NULL;
+                    $cols = array("Record ID", "Date", "Pass", "Admin ID");
+                    printTable($result, $cols);
+
+                ?>
+
+                </br> <!-- Form for inserting a maintenance record -->
+                <h6><b>Add New Maintenance Reocrd:</b></h6>
+                <form method= "GET" action="maintenanceRecordQuery.php">
+                    <p><font size="3" color=black> 
+                        Equipment ID: &nbsp;&nbsp;
+                            <input type="number" name="equipid"> </br>
+                        Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="date" name="date"> </br>
+                        Pass/Fail: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <select name="pass"> 
+                                <option value="true">Pass</option>
+                                <option value="false">Fail</option>
+                            </select> </br>
+                        Admin ID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="number" name="adminid"> </br>
+                            
+                    <input type="submit" value="Add" name="insert_mrecord"></p>
+                </form>
+                <?php
+                    echo "Need to confirm which field(s) to update data in order to create correct input form </br>";
+                    echo "TODO: need to call proper fn to insert the record </br>";
+                    echo "Output whether the POST was successful...</br>";
+                ?>
+
             </div>
         </div>
 

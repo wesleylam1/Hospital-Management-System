@@ -9,6 +9,8 @@ $db_conn = dbConnect();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <head>
         <title> Hospital Mgmt Sys </title>
     <style> 
@@ -54,9 +56,50 @@ $db_conn = dbConnect();
     }
 
     /* Change color on hover */
-    .navbar a:hover {
+    .navbar a:hover .dropdown:hover .dropbtn {
         background-color: rgb(107, 134, 96);
         color: whitesmoke;
+    }
+
+    /*add drop down list in navbar*/
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+    .dropdown .dropbtn {
+        font-size: 16px;  
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
     }
 
     /* Column container */
@@ -113,7 +156,7 @@ $db_conn = dbConnect();
     </style>
 
     <div class = "header">
-        <h1>Hospital Management System</h1>
+        <h1><b><a href= "home.php" style="text-decoration:none;">Hospital Management System </a></b></h1>
         <p>UBC CPSC304 Project </p>
     </div>
 
@@ -125,10 +168,11 @@ $db_conn = dbConnect();
             <a href="doctor.php">Doctor</a>
             <a href="nurse.php">Nurse</a>
             <a href="admin.php">Admin</a>
+            
         </div>
             <div class="main">
-                <h6>Welcome to the hospital management system!</h6>
-                <p>Please select your user class above.</p>
+                <h6>Welcome to the hospital management system!</br>
+                    Please select your user class above.</h6>
             </div>
         </div>
 
