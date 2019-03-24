@@ -207,6 +207,27 @@ function populateDb() {
         Disease', 'Elderly Services')"
     ));
 
+    executePlainSQL("DROP TABLE Nurse CASCADE CONSTRAINTS");
+    executePlainSQL("CREATE TABLE Nurse (
+        id INTEGER PRIMARY KEY,
+        name CHAR(50) NOT NULL,
+        phone CHAR(50) NOT NULL,
+        address CHAR(50),
+        department CHAR(50),
+        UNIQUE(name, phone))"
+    );
+    executeMultipleSqlCommands(array(
+        "INSERT INTO Nurse
+        VALUES (3000, 'Arthur Davila', '778 333 8898', '1209 Hawke Ave, Vancouver, BC V6R 2C9', 'Cardiology')",
+        "INSERT INTO Nurse
+        VALUES (3001, 'Susan Lovell', '604 239 8849', '2219 Hastings St, Vancouver, BC V2A 1B2', 'Oncology')",
+        "INSERT INTO Nurse
+        VALUES (3002, 'Harry Torres', '604 709 2293', '9089 Hazelbridge Way St, Vancouver, BC V6X 4J7', 'Oncology')",
+        "INSERT INTO Nurse
+        VALUES (3003, 'Shakir Leblanc', '778 120 9482', '2309 Main St, Vancouver, BC V6B 1A9', 'Oncology')",
+        "INSERT INTO Nurse
+        VALUES (3004, 'Aubrey Mitchell', '778 435 0921', '1209 Apple St, Vancouver, BC V5A 1Z2', 'Cardiology')"
+    ));
     executePlainSQL("DROP TABLE Room CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Room (
         room_type CHAR(50) NOT NULL,
@@ -232,6 +253,28 @@ function populateDb() {
         VALUES ('Meeting room', 'Infection Control', 500, '1')"
     ));
 
+    executePlainSQL("DROP TABLE AssignTo CASCADE CONSTRAINTS");
+    executePlainSQL("CREATE TABLE AssignTo (
+        staff_id INTEGER, 
+        room_department CHAR(50), 
+        room_number INTEGER,
+        PRIMARY KEY (staff_id, room_department, room_number),
+        FOREIGN KEY (staff_id) REFERENCES Nurse(id) ON DELETE CASCADE, 
+        FOREIGN KEY (room_department, room_number) REFERENCES Room (department, room_number) ON DELETE CASCADE)"
+    );
+
+    executeMultipleSqlCommands(array(
+        "INSERT INTO AssignTo
+        VALUES (3000, 'Cardiology', 100)",
+        "INSERT INTO AssignTo
+        VALUES (3001, 'Oncology',200)",
+        "INSERT INTO AssignTo
+        VALUES (3002, 'Oncology', 200)",
+        "INSERT INTO AssignTo
+        VALUES (3003, 'Oncology', 200)",
+        "INSERT INTO AssignTo
+        VALUES (3004, 'Cardiology', 100)"
+    ));
     executePlainSQL("DROP TABLE Appointment CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Appointment(
         patient_id INTEGER,

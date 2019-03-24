@@ -208,8 +208,11 @@ $db_conn = dbConnect();
 
                     if ($db_conn) {
                         if (array_key_exists('roomquery', $_GET)) {
-                            //"TODO: need to call fn to get data for table and store as result </br>";
-                            $result = executePlainSQL("Select $c from Patient");
+                            if ($_GET['roomtype'] == "true"){
+                                $result = executePlainSQL("SELECT R.department, R.room_number, R.room_type FROM Room R, AssignTo A WHERE A.room_department = R.department AND R.room_number = A.room_number AND A.staff_id = $nurseid");
+                            }else{
+                                $result = executePlainSQL("SELECT R.department, R.room_number FROM Room R, AssignTo A WHERE A.room_department = R.department AND R.room_number = A.room_number AND A.staff_id = $nurseid");
+                            }
                             printTable($result, $cols);
                         }
                     }

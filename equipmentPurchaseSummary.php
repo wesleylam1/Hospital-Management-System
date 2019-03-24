@@ -210,15 +210,21 @@ $db_conn = dbConnect();
                     } else {
                         if ($db_conn) {
                             if (array_key_exists('equipmentpurchasesummaryquery', $_GET)) {
-                                $totalamount = "90.45 (dummy value)"; // to remove this
-                                //$totalamount = testfun1($p2, $p1);//TODO: call the function;
+                                $result = executePlainSQL("SELECT sum(price) as sum FROM Equipment WHERE purchase_date between date'$startdate' and date'$enddate'");
+                                if ($result == null){
+                                    $totalamount = 0;
+                                }else{
+                                    $row = Oci_Fetch_Array($result, OCI_BOTH);
+                                    $totalamount .= $row["0"];  
+                                }
+                                
                             }
                         }
                     }
-                    
                     echo "Start date: $startdate <br>";
                     echo "End date: $enddate <br>";
-                    echo "Total equipment purchase amount: $ $totalamount <br>";
+                    echo "Total equipment purchase amount: $$totalamount <br>";
+                   
                 ?>
                 
             </div>
