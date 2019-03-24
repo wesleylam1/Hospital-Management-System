@@ -160,7 +160,7 @@ function populateDb() {
         "INSERT INTO Disease VALUES ('Liver Cancer Stage 2')"
     ));
 
-    //executePlainSQL("DROP TABLE Has_Disease CASCADE CONSTRAINTS");
+    executePlainSQL("DROP TABLE Has_Disease CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Has_Disease(
         disease_name CHAR(50),
         cured CHAR(1) NOT NULL,
