@@ -228,6 +228,54 @@ function populateDb() {
         "INSERT INTO Nurse
         VALUES (3004, 'Aubrey Mitchell', '778 435 0921', '1209 Apple St, Vancouver, BC V5A 1Z2', 'Cardiology')"
     ));
+	
+    executePlainSQL("Admin CASCADE CONSTRAINTS");
+    executePlainSQL("CREATE TABLE Admin (
+	id INTEGER PRIMARY KEY,
+	name CHAR(50) NOT NULL,
+	phone CHAR(50) NOT NULL,
+	address CHAR(50),
+	department CHAR(50),
+	UNIQUE(name, phone))"
+    );
+    executeMultipleSqlCommands(array(
+	"INSERT INTO Admin 
+	VALUES (2000, 'Bob Ma', '778 120 9804', '2398 Mainland St, Vancouver, BC V4R 1D7', 'Cardiology')",
+	"INSERT INTO Admin 
+	VALUES (2001, 'Will Banks', '604 509 8325', '1092 Hastings St, Vancouver, BC V2A 1B2', 'Oncology')",
+	"INSERT INTO Admin 
+	VALUES (2002, 'Ariel Gordon', '604 792 1029', '6789 Hazelbridge Way St, Vancouver, BC V6X 4J7',
+'Nutrition and Dietetics')",
+	"INSERT INTO Admin 
+	VALUES (2003, 'Susan Tate', '778 289 7323', '4219 Graham St, Vancouver, BC V2C 1T6', 'Infection
+Control')",
+	"INSERT INTO Admin 
+	VALUES (2004, 'Ciara Conley', '778 129 8419', '6459 Robson St, Vancouver, BC V7Y 0A1', 'Elderly
+Services')"
+    ));
+	
+    executePlainSQL("Maintenance_Record CASCADE CONSTRAINTS");
+    executePlainSQL("CREATE TABLE Maintenance_Record(
+	record_id INTEGER PRIMARY KEY,
+	record_date DATE NOT NULL,
+	pass CHAR(1) NOT NULL,
+	admin_id INTEGER NOT NULL,
+	equipment_id INTEGER NOT NULL,
+	FOREIGN KEY(equipment_id) REFERENCES Equipment(id) ON DELETE CASCADE,
+	FOREIGN KEY(admin_id) REFERENCES Admin(id) ON DELETE SET NULL)");
+    executeMultipleSqlCommands(array(
+	"INSERT INTO Maintenance_Record 
+	VALUES(1000, DATE '2019-01-01', '1', 2000, 1000)",
+	"INSERT INTO Maintenance_Record 
+	VALUES(1001, DATE '2019-01-01', '1', 2000, 1001)",
+	"INSERT INTO Maintenance_Record 
+	VALUES(1002, DATE '2019-01-01', '1', 2001, 1002)",
+	"INSERT INTO Maintenance_Record 
+	VALUES(1003, DATE '2019-01-01', '0', 2002, 1003)",
+	"INSERT INTO Maintenance_Record 
+	VALUES(1004, DATE '2019-01-01', '1', 2002, 1004)"
+    ));
+	
     executePlainSQL("DROP TABLE Room CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Room (
         room_type CHAR(50) NOT NULL,
