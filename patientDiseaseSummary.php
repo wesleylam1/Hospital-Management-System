@@ -197,9 +197,22 @@ $db_conn = dbConnect();
                 <h5><b>Patient Disease Summary</b></h5>
                 
                 <?php
-                    echo "TODO: need to call fn to get data for table and store as result";
-                    $table1 = NULL;
-                    printTable($table1, array("Disease Name", "Number of Patients"));
+                   echo "TODO: need to call fn to get data for table and store as result";
+                    $diseasenm = $_GET['diseasenm'];
+                    echo "Disease Name: ".$diseasenm."</br>";
+                    $table1 = NULL
+                     if ($db_conn) {
+                        if (array_key_exists('patientdiseasequery', $_GET)) {
+                            $table1 = executePlainSQL("SELECT disease_name, COUNT(patient_id)
+                                            FROM Has_Disease
+                                            WHERE cured = '0' AND disease_name = $diseasenm");
+                            $diseasenm = $_GET['diseasenm'];
+                            echo "Disease Name: ".$diseasenm."</br>";
+                            printTable($table1, array("Disease Name", "Number of Patients"));
+                        } else if ($diseasenm != NULL) {
+                            echo "invalid input...</br>";
+                        }
+                     }
                 ?>
 
                 <h5></br><b>List of Patients</b></h5>
@@ -211,8 +224,10 @@ $db_conn = dbConnect();
                         if (array_key_exists('patientdiseasequery', $_GET)) {
                             echo "TODO: need to call fn to get data for table and store as result";
                             echo "note: we can change cols below, depends on what we wanna output";
-                            $cols = array("Patient ID", "Name", "Age", "Status");
-                            
+                            $cols = array("Patient ID", "Name", "Age");
+                            $table2 = executePlainSQL("SELECT P.patient_id, P.name, P.Age
+                                                      FROM Patient P, Has_Disease H
+                                                      WHERE P.id = H.patient_id AND H.cured = '0'");
                             printTable($table2, $cols);
                         }
                     }
