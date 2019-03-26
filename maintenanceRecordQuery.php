@@ -195,25 +195,30 @@ $db_conn = dbConnect();
                 </br> <!-- Render maintenance records for the selected equipment -->
                 <h6><b>Maintenance Reocrds:</b></h6>
                 <?php
-                    $epid = $_GET['equipid'];
+                     $epid = $_GET['equipid'];
                     echo "Equipment ID: ".$epid."</br>";
                     $result = NULL;
                     
                     if ($db_conn) {
                         if (array_key_exists('mrecordquery', $_GET)) {
-                            echo "TODO: need to call proper fn to render record table</br>";
-                            echo "pending col's to render...";
                             $cols = array("Record ID", "Date", "Pass", "Admin ID");
+                            $result = executePlainSQL ("SELECT M.record_id, M.record_date, M.pass, M.admin_id
+                                                       FROM Maintenance_Record M, Equipment E
+                                                       WHERE E.id = M.equipment_id AND E.id = $epid");
                             printTable($result, $cols);
+                        } elseif ($epid != NULL){
+                            echo "invalid input...</br>";
                         }
                     }
                     
                 ?>
 
-                </br> <!-- Form for inserting a maintenance record -->
+                 </br> <!-- Form for inserting a maintenance record -->
                 <h6><b>Add New Maintenance Reocrd:</b></h6>
                 <form method= "GET" action="maintenanceRecordQuery.php">
-                    <p><font size="3" color=black> 
+                    <p><font size="3" color=black>
+                        Record ID: &nbsp;&nbsp;
+                            <input type="number" name="recordid"> </br>
                         Equipment ID: &nbsp;&nbsp;
                             <input type="number" name="equipid"> </br>
                         Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -229,11 +234,21 @@ $db_conn = dbConnect();
                     <input type="submit" value="Add" name="insert_mrecord"></p>
                 </form>
                 <?php
-                    echo "Need to confirm which field(s) to update data in order to create correct input form </br>";
-                    echo "TODO: need to call proper fn to insert the record </br>";
+                    $recordid = $_POST['recordid'];
+                    $equipid = $_POST['equipid'];
+                    $date = $_POST['date'];
+                    $adminid = $_POST['adminid'];
+                    $pass = $_POST['pass'];
+                    if ($pass == True){
+                        $pass = '1';
+                    } else {
+                        $pass = '0';
+                    }
                     if ($db_conn) {
                         if (array_key_exists('insert_mrecord', $_POST)) {
-                            // need more info to do this part...
+                            executePlainSQL ("INSERT INTO Maintenance_Record VALUES
+                                             ('$recordid', DATE '$date', '$pass', $adminid, '$equipid')");
+                            executePlainSQL ("COMMIT WORK");
                         }
                     }
                 ?>
