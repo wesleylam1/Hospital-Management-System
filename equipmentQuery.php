@@ -198,16 +198,21 @@ $db_conn = dbConnect();
                 <?php
                     $epid = $_GET['equipmentid'];
                     echo "Equipment ID: ".$epid."</br>";
-                    echo "TODO: need to call proper fn to render equipment info table</br>";
-                    echo "pending col's to render...";
                     $result = NULL;
                     $cols = array("Name", "Brand", "Usage", "Purchase Date", 
                     "Price", "Manufacturing Location", "Customer Support Phone Number");
+
                     if ($db_conn){
                     	if (array_key_exists('equipmentQuery', $_GET)){
                     		$result = executePlainSQL("SELECT e.name, e.brand, e1.usage, e.purchase_date, e.price, e2.manufactured_in, e3.customer_support_number FROM Equipment e, Equipment1 e1, Equipment2 e2, Equipment3 e3 WHERE e.brand = e3.brand AND e.name = e1.name AND e.name = e2.name AND e.brand = e2.brand AND e.id = $epid");
-                    		
-                    printTable($result, $cols);}}
+                            $epid = $_GET['equipmentid'];
+                            echo "Equipment ID: ".$epid."</br>";
+                            printTable($result, $cols);
+                        } elseif ($epid != NULL){
+                            echo "invalid input...</br>";
+                        }
+                    }
+
 
                 ?>
                 
@@ -233,37 +238,36 @@ $db_conn = dbConnect();
                     <p><input type="submit" value="Add" name="insert_equipment"></p>
                 </form>
                 <?php
-                   $id = $_POST['equipmentid_insert'];
-                    $name = $_POST['name'];
-                    $brand = $_POST['brand'];
-                    $usage = $_POST['usage'];
-                    $purchasedate = $_POST['date'];
-                    $price = $_POST['price'];
-                    $manufacturedin = $_POST['m_loc'];
-                    $csphonenum = $_POST['phone'];
                     if ($db_conn) {
                         if (array_key_exists('insert_equipment', $_POST)) {
                             executePlainSQL("INSERT INTO Equipment Values($id, $name, $brand, $purchasedate, $price)");
                             executePlainSQL("INSERT INTO Equipment1 Values($name, $usage)");
                             executePlainSQL("INSERT INTO Equipment2 Values($name, $brand, $manufacturedin)");
                             executePlainSQL("INSERT INTO Equipment3 Values($brand, $csphonenum)");
-                            executePlainSQL("COMMIT WORK")
+                            executePlainSQL("COMMIT WORK");
                         }
                     }
                 ?>
                 
                 </br> <!-- Update equipment record -->
-                <h6><b>Update Equipment Data:</b></h6>
+                <h6><b>Update Equipment Customer Support Number:</b></h6>
                 <!-- form to be created!!! -->
                 <form method= "POST" action="equipmentQuery.php">
-                    <p><font size="2" color=black> Equipment ID: <input type="number" value="" name="equipmentid_update">
-                    <p>TODO: will need to add more fields here...</p>
+                    <p><font size="2" color=black> 
+                    Equipment ID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="number" value="" name="equipmentid_update">
+                    <p><font size="2" color=black> 
+                    Customer Support Number: 
+                        <input type="text" value="" name="csphonenum"></br>
                     <p><input type="submit" value="Update" name="update_equipment"></p>
                 </form>
                 <?php
-                    echo "Need to confirm which field(s) to update for equipment data in order to create correct input form </br>";
-                    echo "TODO: need to call proper fn to delete the equipment </br>";
-                    echo "Output whether the POST was successful...</br>";
+                    if ($db_conn) {
+                        if (array_key_exists('update_equipment', $_POST)) {
+                            // call fn here
+                            
+                        }
+                    }
                 ?>
 
                 </br> <!-- delete equipment -->
@@ -273,10 +277,10 @@ $db_conn = dbConnect();
                     <p><input type="submit" value="Delete" name="delete_equipment"></p>
                 </form>
                 <?php
-                   $epid_del = $_GET['equipmentid_del'];
-                    $id = $_POST['equipmentid_del'];
+                    $epid_del = $_GET['equipmentid_del'];
                     if ($db_conn) {
                         if (array_key_exists('delete_equipment', $_POST)) {
+                            // call fn here
                             executePlainSQL("DELETE FROM Equipment WHERE  id=$id  ");
                             executePlainSQL("COMMIT WORK");
                         }

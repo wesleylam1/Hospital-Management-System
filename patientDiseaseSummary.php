@@ -197,7 +197,7 @@ $db_conn = dbConnect();
                 <h5><b>Patient Disease Summary</b></h5>
                 
                 <?php
-                    echo "TODO: need to call fn to get data for table and store as result";
+                    // call function here
                     $table1 = NULL;
                     printTable($table1, array("Disease Name", "Number of Patients"));
                 ?>
@@ -209,11 +209,12 @@ $db_conn = dbConnect();
                     $table2 = NULL;
                     if ($db_conn) {
                         if (array_key_exists('patientdiseasequery', $_GET)) {
-                            echo "TODO: need to call fn to get data for table and store as result";
-                            echo "note: we can change cols below, depends on what we wanna output";
-                            $cols = array("Patient ID", "Name", "Age", "Status");
+                            $cols = array("Patient ID", "Name", "Age", "Cured (0-False, 1-True)");
+                            // call function here
                             
                             printTable($table2, $cols);
+                        } elseif ($diseasenm != NULL){
+                            echo "invalid input...</br>";
                         }
                     }
                 ?>

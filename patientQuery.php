@@ -206,10 +206,11 @@ $db_conn = dbConnect();
                             JOIN Prescription1 p1 ON p.drug_name = p1.drug_name and p2.total_amount = p1.total_amount
                             RIGHT OUTER JOIN Treatment_History th ON th.id = p.treatment_history_id
                             WHERE th.patient_id = $pid
-                            ORDER BY th.id"
-                            );
+                            ORDER BY th.id");
                             
                             printTable($result1, $cols1);
+                        } elseif($pid != NULL) {
+                            echo "invalid input... </br>";
                         }
                     }
                     
@@ -226,19 +227,17 @@ $db_conn = dbConnect();
                             $resultx = executePlainSQL("CREATE VIEW RoomEquipmentCount(room_dept, room_num, numEquipment) AS 
                                 SELECT room_department, room_number, count(*)
                                 FROM locatedAt
-                                GROUP BY room_department, room_number
-                            ");
+                                GROUP BY room_department, room_number");
 
                             $result2 = executePlainSQL("SELECT a.doctor_id, d.specialization, a.start_date_time, a.end_date_time, r.department, r.room_number, re.numEquipment
                                 FROM appointment a, doctor d, room r LEFT OUTER JOIN RoomEquipmentCount re ON re.room_dept = r.department AND re.room_num = r.room_number
                                 WHERE a.doctor_id = d.id AND a.patient_id = $pid AND a.room_dept = r.department AND a.room_num = r.room_number
-                                ORDER BY a.start_date_time, a.end_date_time
-                            ");
+                                ORDER BY a.start_date_time, a.end_date_time");
                             
                             executePlainSQL("DROP VIEW RoomEquipmentCount");
 
                             printTable($result2, $cols2);
-                        }
+                        } 
                     }
                 ?>
 

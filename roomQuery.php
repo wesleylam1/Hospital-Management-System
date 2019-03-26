@@ -29,18 +29,15 @@ $db_conn = dbConnect();
         background: rgb(255, 255, 255);
         color: rgb(0, 0, 0);
     }
-
     /* Increase font size of h1 elemet */
     .header h1 {
         font-size: 30px;
     }
-
     /* Style the navigation bar links */
     .navbar {
         overflow: hidden;
         background-color: rgb(174, 179, 224);
     }
-
     /* Style the navigation bar links */
     .navbar a {
         float: left;
@@ -50,24 +47,20 @@ $db_conn = dbConnect();
         padding: 14px 20px;
         text-decoration: none;
     }
-
     /* Right-aligned link */
     .navbar a.right {
         float: right;
     }
-
     /* Change color on hover */
     .navbar a:hover {
         background-color: rgb(107, 134, 96);
         color: whitesmoke;
     }
-
     /* Column container */
     .row {
         display: flex;
         flex-wrap: wrap;
     }
-
     /* Create 2 unequal columns that sits next to each other */
     /* Sidebar (left column) */
     /*
@@ -77,35 +70,30 @@ $db_conn = dbConnect();
         padding: 20px;
     }
     */
-
     /* Main column */
     .main {
         flex: 80%;
         background-color: whitesmoke;
         padding: 20px;
     }
-
     /* Fake image */
     .fakeimg {
         background-color: #aaaaaa;
         width: 100%;
         padding: 20px;
     }
-
     /* Footer */
     .footer {
         padding: 10px;
         text-align: center;
         background: #ddd;
     }  
-
     /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
     @media screen and (max-width: 700px) {
     .row {   
         flex-direction: column;
     }
     }
-
     /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
     @media screen and (max-width: 400px) {
     .navbar a {
@@ -113,7 +101,6 @@ $db_conn = dbConnect();
         width:100%;
     }
     }
-
     /*add drop down list in navbar*/
     .dropdown {
         float: left;
@@ -137,7 +124,6 @@ $db_conn = dbConnect();
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
-
     .dropdown-content a {
         float: none;
         color: black;
@@ -146,11 +132,9 @@ $db_conn = dbConnect();
         display: block;
         text-align: left;
     }
-
     .dropdown-content a:hover {
         background-color: #ddd;
     }
-
     .dropdown:hover .dropdown-content {
         display: block;
     }
@@ -199,13 +183,11 @@ $db_conn = dbConnect();
 
                 <h6><b>Table: List of assigned rooms</b></h6>
                 <?php
-                    echo "note: we can change cols below, depends on what we wanna output </br>";
                     $cols = array("Room Department", "Room Number");
                     if ($_GET['roomtype'] == "true") {
                         //$cols = array("Room Department", "Room Number", "Room Type");
                         $cols = array("Room Department", "Room Number", "Type");
                     }
-
                     if ($db_conn) {
                         if (array_key_exists('roomquery', $_GET)) {
                             if ($_GET['roomtype'] == "true"){
@@ -214,6 +196,8 @@ $db_conn = dbConnect();
                                 $result = executePlainSQL("SELECT R.department, R.room_number FROM Room R, AssignTo A WHERE A.room_department = R.department AND R.room_number = A.room_number AND A.staff_id = $nurseid");
                             }
                             printTable($result, $cols);
+                        } elseif ($nurseid != NULL) {
+                            echo "invalid input... </br>";
                         }
                     }
       
@@ -227,5 +211,3 @@ $db_conn = dbConnect();
     </body>
 
 </html>
-
-

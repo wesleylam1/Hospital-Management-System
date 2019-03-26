@@ -6,14 +6,11 @@ function dbConnect() {
 function dbLogout($db_conn) {
 	OCILogoff($db_conn);
 }
-
-
 function executeMultipleSqlCommands($arr) {
     foreach ($arr as $cmd) {
         executePlainSQL($cmd);
     }
 }
-
 function executePlainSQL($cmdstr) { 
     // Take a plain (no bound variables) SQL command and execute it.
    //echo "<br>running ".$cmdstr."<br>";
@@ -21,7 +18,6 @@ function executePlainSQL($cmdstr) {
    $statement = OCIParse($db_conn, $cmdstr); 
     // There is a set of comments at the end of the file that 
     // describes some of the OCI specific functions and how they work.
-
    if (!$statement) {
        echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
        $e = OCI_Error($db_conn); 
@@ -29,7 +25,6 @@ function executePlainSQL($cmdstr) {
        echo htmlentities($e['message']);
        $success = False;
    }
-
    $r = OCIExecute($statement, OCI_DEFAULT);
    if (!$r) {
        echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
@@ -38,12 +33,9 @@ function executePlainSQL($cmdstr) {
        echo htmlentities($e['message']);
        $success = False;
    } else {
-
    }
    return $statement;
-
 }
-
 function executeBoundSQL($cmdstr, $list) {
 	/* Sometimes the same statement will be executed several times.
         Only the value of variables need to be changed.
@@ -53,17 +45,14 @@ function executeBoundSQL($cmdstr, $list) {
         This is also very useful in protecting against SQL injection
         attacks.  See the sample code below for how this function is
         used. */
-
 	global $db_conn, $success;
 	$statement = OCIParse($db_conn, $cmdstr);
-
 	if (!$statement) {
 		echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
 		$e = OCI_Error($db_conn);
 		echo htmlentities($e['message']);
 		$success = False;
 	}
-
 	foreach ($list as $tuple) {
 		foreach ($tuple as $bind => $val) {
 			//echo $val;
@@ -85,9 +74,7 @@ function executeBoundSQL($cmdstr, $list) {
 			$success = False;
 		}
 	}
-
 }
-
 function printTable($resultFromSQL, $namesOfColumnsArray)
 {
     echo "<table>";
@@ -97,11 +84,9 @@ function printTable($resultFromSQL, $namesOfColumnsArray)
         echo "<th>$name</th>";
     }
     echo "</tr>";
-
     while ($row = OCI_Fetch_Array($resultFromSQL, OCI_BOTH)) {
         echo "<tr>";
         $string = "";
-
         // iterates through the results returned from SQL query and
         // creates the contents of the table
         for ($i = 0; $i < sizeof($namesOfColumnsArray); $i++) {
@@ -112,12 +97,10 @@ function printTable($resultFromSQL, $namesOfColumnsArray)
     }
     echo "</table>";
 }
-
 // JC: test function, to remove...
 function testfun1($x, $y) {
     return array("val1", "val2", "val3");
 }
-
 function populateDb() {
     executePlainSQL("DROP TABLE Patient CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Patient(
@@ -147,7 +130,6 @@ function populateDb() {
         VALUES (104, '9123 098 230', 'Jill Garcia', 78, '5000 Main St, Vancouver, BC V6B 1A9', '778 387 5321',
         '604 239 8109')"
     ));
-
     executePlainSQL("DROP TABLE Disease CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Disease(name CHAR(50) PRIMARY KEY)");
     executeMultipleSqlCommands(array(
@@ -159,7 +141,6 @@ function populateDb() {
         "INSERT INTO Disease VALUES ('Mental Illness')",
         "INSERT INTO Disease VALUES ('Liver Cancer Stage 2')"
     ));
-
     executePlainSQL("DROP TABLE Has_Disease CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Has_Disease(
         disease_name CHAR(50),
@@ -178,7 +159,6 @@ function populateDb() {
         "INSERT INTO Has_Disease VALUES('Alzheimers Disease', '0', 104)"
         )
     );
-
     executePlainSQL("DROP TABLE Doctor CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Doctor (
         id INTEGER PRIMARY KEY,
@@ -206,7 +186,6 @@ function populateDb() {
         VALUES (1004, 'Tim Watsons', '778 129 8419', '1209 Renfrew St, Vancouver, BC V1T 1S3', 'Alzheimers
         Disease', 'Elderly Services')"
     ));
-
     executePlainSQL("DROP TABLE Nurse CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Nurse (
         id INTEGER PRIMARY KEY,
@@ -252,7 +231,6 @@ function populateDb() {
         "INSERT INTO Room
         VALUES ('Meeting room', 'Infection Control', 500, '1')"
     ));
-
     executePlainSQL("DROP TABLE AssignTo CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE AssignTo (
         staff_id INTEGER, 
@@ -262,7 +240,6 @@ function populateDb() {
         FOREIGN KEY (staff_id) REFERENCES Nurse(id) ON DELETE CASCADE, 
         FOREIGN KEY (room_department, room_number) REFERENCES Room (department, room_number) ON DELETE CASCADE)"
     );
-
     executeMultipleSqlCommands(array(
         "INSERT INTO AssignTo
         VALUES (3000, 'Cardiology', 100)",
@@ -315,7 +292,6 @@ function populateDb() {
         VALUES (104, 1004, 'Elderly Services', 400, TO_DATE('2019-05-20 14:30:00', 'yyyy/mm/dd hh24:mi:ss'),
         TO_DATE('2019-05-20 15:30:00', 'yyyy/mm/dd hh24:mi:ss'))"
     ));
-
     executePlainSQL("DROP TABLE Equipment1 CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Equipment1(
         name CHAR(50) PRIMARY KEY,
@@ -336,7 +312,6 @@ function populateDb() {
         "INSERT INTO Equipment1
         VALUES ('X-Ray Machine', 'Used for bone imaging')"
     ));
-
     executePlainSQL("DROP TABLE Equipment2 CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Equipment2(
         name CHAR(50),
@@ -360,7 +335,6 @@ function populateDb() {
         "INSERT INTO Equipment2
         VALUES ('X-Ray Machine', 'Radiant Medical', 'Canada')"
     ));
-
     executePlainSQL("DROP TABLE Equipment3 CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Equipment3(
         brand CHAR(50) PRIMARY KEY,
@@ -381,7 +355,6 @@ function populateDb() {
         "INSERT INTO Equipment3
         VALUES ('Radiant Medical', '1800 598 2322')"
     ));
-
     executePlainSQL("DROP TABLE Equipment CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Equipment (
         id INTEGER PRIMARY KEY,
@@ -409,7 +382,6 @@ function populateDb() {
         "INSERT INTO Equipment
         VALUES (1006, 'X-Ray Machine', 'Radiant Medical', DATE '2011-01-08', 79599)"
     ));
-
     executePlainSQL("DROP TABLE LocatedAt CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE LocatedAt (
         room_department CHAR(50),
@@ -439,7 +411,6 @@ function populateDb() {
         "INSERT INTO LocatedAt
         VALUES ('Nutrition and Dietetics', 300, 1003)"
     ));
-
     executePlainSQL("DROP TABLE Treatment_History CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Treatment_History (
         id INTEGER PRIMARY KEY,
@@ -463,7 +434,6 @@ function populateDb() {
         "INSERT INTO Treatment_History
         VALUES (5, DATE '2019-02-05', 'Prescribed with Razadyne', 104)"
     ));
-
     executePlainSQL("DROP TABLE Prescription1 CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Prescription1 (
         drug_name CHAR(50),
@@ -482,7 +452,6 @@ function populateDb() {
         "INSERT INTO Prescription1
         VALUES ('Razadyne', 300, 150)"
     ));
-
     executePlainSQL("DROP TABLE Prescription2 CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Prescription2 (
         dosage INTEGER,
@@ -501,7 +470,6 @@ function populateDb() {
         "INSERT INTO Prescription2
         VALUES (10, 30, 300)"
     ));
-
     executePlainSQL("DROP TABLE Prescription CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Prescription (
         drug_name CHAR(50),

@@ -201,10 +201,12 @@ $db_conn = dbConnect();
                     
                     if ($db_conn) {
                         if (array_key_exists('mrecordquery', $_GET)) {
-                            echo "TODO: need to call proper fn to render record table</br>";
-                            echo "pending col's to render...";
                             $cols = array("Record ID", "Date", "Pass", "Admin ID");
+                            // call fn here...
+                            
                             printTable($result, $cols);
+                        } elseif ($epid != NULL){
+                            echo "invalid input...</br>";
                         }
                     }
                     
@@ -229,11 +231,9 @@ $db_conn = dbConnect();
                     <input type="submit" value="Add" name="insert_mrecord"></p>
                 </form>
                 <?php
-                    echo "Need to confirm which field(s) to update data in order to create correct input form </br>";
-                    echo "TODO: need to call proper fn to insert the record </br>";
                     if ($db_conn) {
                         if (array_key_exists('insert_mrecord', $_POST)) {
-                            // need more info to do this part...
+                            // call fn here
                         }
                     }
                 ?>
