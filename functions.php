@@ -97,10 +97,7 @@ function printTable($resultFromSQL, $namesOfColumnsArray)
     }
     echo "</table>";
 }
-// JC: test function, to remove...
-function testfun1($x, $y) {
-    return array("val1", "val2", "val3");
-}
+
 function populateDb() {
     executePlainSQL("DROP TABLE Patient CASCADE CONSTRAINTS");
     executePlainSQL("CREATE TABLE Patient(

@@ -1,0 +1,15 @@
+1. Patient List query: generating a full list of patients personal data
+2. Patient Query: retrieving patient's treatment & prescription istory, appointments and diseases data
+3. Insert Appointment (under Patient Update query)
+4. Insert Treatment History & Prescription Data (under Patient Update query)
+5. Update Disease Name (under Patient Update query)
+6. Update Patient's Disease Condition (under Patient Update query)
+7. Room Assignment Query for Nurses: generating a list of rooms assigned for a nurses
+8. Equipment Query: generating equipment data
+9. Insert Equipment (under Equipment Query)
+10. Update Equipment data (under Equipment Query)
+11. Delete Equipment (under Equipment Query)
+12. Maintenance Records Query: generate a list of maintenance records for a given equipment
+13. Insert Maintenance Record (under Maintenance Records Query)
+14. Equipment Purchase Summary: calculating the total amount spent on equipment procurement in the given time period
+15. Patient Disease Summary: generating a patient headcount for each disease in the summary table, also generate a list of patients who are diagnosed with the given disease
