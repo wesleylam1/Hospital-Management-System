@@ -200,18 +200,15 @@ $db_conn = dbConnect();
                     $result = NULL;
                     $cols = array("Name", "Brand", "Usage", "Purchase Date", 
                     "Price", "Manufacturing Location", "Customer Support Phone Number");
-
                     if ($db_conn){
-                    	if (array_key_exists('equipmentQuery', $_GET)){
-                    		$result = executePlainSQL("SELECT e.name, e.brand, e1.usage, e.purchase_date, e.price, e2.manufactured_in, e3.customer_support_number FROM Equipment e, Equipment1 e1, Equipment2 e2, Equipment3 e3 WHERE e.brand = e3.brand AND e.name = e1.name AND e.name = e2.name AND e.brand = e2.brand AND e.id = $epid");
-                            $epid = $_GET['equipmentid'];
-                            echo "Equipment ID: ".$epid."</br>";
+                    		$result = executePlainSQL("SELECT e.name, e.brand, e1.usage, e.purchase_date, e.price, e2.manufactured_in, e3.customer_support_number
+                                                      FROM Equipment e, Equipment1 e1, Equipment2 e2, Equipment3 e3
+                                                      WHERE e.brand = e3.brand AND e.name = e1.name AND e.name = e2.name AND e.brand = e2.brand AND e.id = $epid");
+                            //$epid = $_GET['equipmentid'];
+                            //echo "Equipment ID: ".$epid."</br>";
                             printTable($result, $cols);
-                        } elseif ($epid != NULL){
-                            echo "invalid input...</br>";
-                        }
+                       
                     }
-
 
                 ?>
                 
@@ -237,14 +234,22 @@ $db_conn = dbConnect();
                     <p><input type="submit" value="Add" name="insert_equipment"></p>
                 </form>
                 <?php
+                    $id = $_POST['equipmentid_insert'];
+                    $name = $_POST['name'];
+                    $brand = $_POST['brand'];
+                    $usage = $_POST['usage'];
+                    $purchasedate = $_POST['date'];
+                    $price = $_POST['price'];
+                    $manufacturedin = $_POST['m_loc'];
+                    $csphonenum = $_POST['phone'];
                     if ($db_conn) {
-                        if (array_key_exists('insert_equipment', $_POST)) {
-                            executePlainSQL("INSERT INTO Equipment Values($id, $name, $brand, $purchasedate, $price)");
-                            executePlainSQL("INSERT INTO Equipment1 Values($name, $usage)");
-                            executePlainSQL("INSERT INTO Equipment2 Values($name, $brand, $manufacturedin)");
-                            executePlainSQL("INSERT INTO Equipment3 Values($brand, $csphonenum)");
+
+                            executePlainSQL("INSERT INTO Equipment3 Values('$brand', '$csphonenum')");
+                            executePlainSQL("INSERT INTO Equipment1 Values('$name', '$usage')");
+                            executePlainSQL("INSERT INTO Equipment2 Values('$name', '$brand', '$manufacturedin')");
+                            executePlainSQL("INSERT INTO Equipment Values('$id', '$name', '$brand', DATE '$purchasedate', '$price')");
                             executePlainSQL("COMMIT WORK");
-                        }
+                       
                     }
                 ?>
                 
@@ -261,10 +266,14 @@ $db_conn = dbConnect();
                     <p><input type="submit" value="Update" name="update_equipment"></p>
                 </form>
                 <?php
+                   $csphonenum = $_POST['csphonenum'];
+                    $eid1 = $_POST['equipmentid_update'];
                     if ($db_conn) {
                         if (array_key_exists('update_equipment', $_POST)) {
                             // call fn here
-                            
+                            executePlainSQL("UPDATE Equipment3 SET customer_support_number = '$csphonenum' 
+                                            WHERE brand = (SELECT brand e FROM Equipment e WHERE e.brand = brand AND e.id = $eid1)");
+                            executePlainSQL("COMMIT WORK");
                         }
                     }
                 ?>
@@ -276,11 +285,12 @@ $db_conn = dbConnect();
                     <p><input type="submit" value="Delete" name="delete_equipment"></p>
                 </form>
                 <?php
-                    $epid_del = $_GET['equipmentid_del'];
+                   $epid_del = $_GET['equipmentid_del'];
+                    $eid = $_POST['equipmentid_del'];
                     if ($db_conn) {
                         if (array_key_exists('delete_equipment', $_POST)) {
                             // call fn here
-                            executePlainSQL("DELETE FROM Equipment WHERE  id=$id  ");
+                            executePlainSQL("DELETE FROM Equipment WHERE  id=$eid");
                             executePlainSQL("COMMIT WORK");
                         }
                     }
