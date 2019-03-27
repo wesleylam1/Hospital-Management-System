@@ -176,11 +176,10 @@ $db_conn = dbConnect();
                     </div>
             </div>
             <a href="patientQuery.php">Patient Query</a>
-            <a href="equipmentQuery.php">Equipment Query</a>
-            <a href="maintenanceRecordQuery.php">Maintenance Record Query</a>
-            <a href="equipmentPurchaseSummary.php">Equipment Purchase Summary</a>
-            <a href="patientDiseaseSummary.php">Patient Disease Summary</a>
             <a href="patientList.php">Patient List</a>
+            <a href="patientDiseaseSummary.php">Patient Disease Summary</a>
+            <a href="sickpatients.php">Sickly Patients</a>
+            <a href="patientUpdate.php">Patient Update</a>
         </div>
         <div class="main">
                 <h3><b>Patient Disease Summary</b><h3>
@@ -193,18 +192,23 @@ $db_conn = dbConnect();
                     <input type="submit" value="submit" name="patientdiseasequery"></p>
                 </form>
 
-                <h6></br>The table below summarizes the number of patients diagnosed with the given disease.</h6>
-                <h5><b>Patient Disease Summary</b></h5>
+                <h5><b>Number of patients who presently have an uncured disease</b></h5>
                 
                 <?php
                     // call function here
-                    $dname = $_GET['diseasenm'];
-                    echo "Input Disease Name: ".$dname."</br>";
                     if ($db_conn) {
-                        if (array_key_exists('patientdiseasequery', $_GET)) {
-                            $table1 = executePlainSQL("SELECT count(*) FROM Has_Disease WHERE disease_name='$dname'");
-                            printTable($table1, array("Number of Patients"));
-                        }
+                        $table1 = executePlainSQL("SELECT count(DISTINCT patient_id) FROM Has_Disease WHERE cured='0'");
+                        printTable($table1, array("Number of Patients"));
+                    }
+                ?>
+
+                <h5><b>Number of total diseases by patient</b></h5>
+                
+                <?php
+                    // call function here
+                    if ($db_conn) {
+                        $table2 = executePlainSQL("SELECT patient_id, count(*) FROM Has_Disease GROUP BY patient_id ");
+                        printTable($table2, array("Patient ID", "Count"));
                     }
                 ?>
 
