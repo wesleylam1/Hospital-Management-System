@@ -190,7 +190,6 @@ $db_conn = dbConnect();
                 
                 <h5></br><b>Patient Query Result</b></h5>
                 <?php 
-                    // populateDb(); // !!! COMMENT AFTER WE FINISH PROJECT, OR NEW DB INFO WILL BE LOST AFTER EACH REFRESH.
                     $pid = $_GET['patientid'];
                     echo "Patient ID: ".$pid."</br>"; 
                 ?>
