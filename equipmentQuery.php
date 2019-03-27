@@ -29,18 +29,15 @@ $db_conn = dbConnect();
         background: rgb(255, 255, 255);
         color: rgb(0, 0, 0);
     }
-
     /* Increase font size of h1 elemet */
     .header h1 {
         font-size: 30px;
     }
-
     /* Style the navigation bar links */
     .navbar {
         overflow: hidden;
         background-color: rgb(174, 179, 224);
     }
-
     /* Style the navigation bar links */
     .navbar a {
         float: left;
@@ -50,24 +47,20 @@ $db_conn = dbConnect();
         padding: 14px 20px;
         text-decoration: none;
     }
-
     /* Right-aligned link */
     .navbar a.right {
         float: right;
     }
-
     /* Change color on hover */
     .navbar a:hover {
         background-color: rgb(107, 134, 96);
         color: whitesmoke;
     }
-
     /* Column container */
     .row {
         display: flex;
         flex-wrap: wrap;
     }
-
     /* Create 2 unequal columns that sits next to each other */
     /* Sidebar (left column) */
     /*
@@ -77,35 +70,30 @@ $db_conn = dbConnect();
         padding: 20px;
     }
     */
-
     /* Main column */
     .main {
         flex: 80%;
         background-color: whitesmoke;
         padding: 20px;
     }
-
     /* Fake image */
     .fakeimg {
         background-color: #aaaaaa;
         width: 100%;
         padding: 20px;
     }
-
     /* Footer */
     .footer {
         padding: 10px;
         text-align: center;
         background: #ddd;
     }  
-
     /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
     @media screen and (max-width: 700px) {
     .row {   
         flex-direction: column;
     }
     }
-
     /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
     @media screen and (max-width: 400px) {
     .navbar a {
@@ -113,7 +101,6 @@ $db_conn = dbConnect();
         width:100%;
     }
     }
-
     /*add drop down list in navbar*/
     .dropdown {
         float: left;
@@ -137,7 +124,6 @@ $db_conn = dbConnect();
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
-
     .dropdown-content a {
         float: none;
         color: black;
@@ -146,11 +132,9 @@ $db_conn = dbConnect();
         display: block;
         text-align: left;
     }
-
     .dropdown-content a:hover {
         background-color: #ddd;
     }
-
     .dropdown:hover .dropdown-content {
         display: block;
     }
@@ -179,6 +163,7 @@ $db_conn = dbConnect();
             <a href="equipmentQuery.php">Equipment Query</a>
             <a href="maintenanceRecordQuery.php">Maintenance Record Query</a>
             <a href="equipmentPurchaseSummary.php">Equipment Purchase Summary</a>
+            <a href="patientDiseaseSummary.php">Patient Disease Summary</a>
             <a href="patientList.php">Patient List</a>
         </div>
             <div class="main">
@@ -201,15 +186,15 @@ $db_conn = dbConnect();
                     $cols = array("Name", "Brand", "Usage", "Purchase Date", 
                     "Price", "Manufacturing Location", "Customer Support Phone Number");
                     if ($db_conn){
+                        if (array_key_exists('equipmentquery', $_GET)){
                     		$result = executePlainSQL("SELECT e.name, e.brand, e1.usage, e.purchase_date, e.price, e2.manufactured_in, e3.customer_support_number
                                                       FROM Equipment e, Equipment1 e1, Equipment2 e2, Equipment3 e3
                                                       WHERE e.brand = e3.brand AND e.name = e1.name AND e.name = e2.name AND e.brand = e2.brand AND e.id = $epid");
                             //$epid = $_GET['equipmentid'];
                             //echo "Equipment ID: ".$epid."</br>";
                             printTable($result, $cols);
-                       
+                        }
                     }
-
                 ?>
                 
                 </br> <!-- Add new equipment -->
@@ -243,13 +228,13 @@ $db_conn = dbConnect();
                     $manufacturedin = $_POST['m_loc'];
                     $csphonenum = $_POST['phone'];
                     if ($db_conn) {
-
+                            if (array_key_exists('insert_equipment', $_POST)){
                             executePlainSQL("INSERT INTO Equipment3 Values('$brand', '$csphonenum')");
                             executePlainSQL("INSERT INTO Equipment1 Values('$name', '$usage')");
                             executePlainSQL("INSERT INTO Equipment2 Values('$name', '$brand', '$manufacturedin')");
                             executePlainSQL("INSERT INTO Equipment Values('$id', '$name', '$brand', DATE '$purchasedate', '$price')");
                             executePlainSQL("COMMIT WORK");
-                       
+                            }
                     }
                 ?>
                 
@@ -266,7 +251,7 @@ $db_conn = dbConnect();
                     <p><input type="submit" value="Update" name="update_equipment"></p>
                 </form>
                 <?php
-                   $csphonenum = $_POST['csphonenum'];
+                    $csphonenum = $_POST['csphonenum'];
                     $eid1 = $_POST['equipmentid_update'];
                     if ($db_conn) {
                         if (array_key_exists('update_equipment', $_POST)) {
@@ -285,7 +270,7 @@ $db_conn = dbConnect();
                     <p><input type="submit" value="Delete" name="delete_equipment"></p>
                 </form>
                 <?php
-                   $epid_del = $_GET['equipmentid_del'];
+                    $epid_del = $_GET['equipmentid_del'];
                     $eid = $_POST['equipmentid_del'];
                     if ($db_conn) {
                         if (array_key_exists('delete_equipment', $_POST)) {
@@ -307,5 +292,3 @@ $db_conn = dbConnect();
     </body>
 
 </html>
-
-

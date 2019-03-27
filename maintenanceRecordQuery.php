@@ -192,7 +192,7 @@ $db_conn = dbConnect();
                     <input type="submit" value="get records" name="mrecordquery"></p>
                 </form>
                 </br> <!-- Render maintenance records for the selected equipment -->
-                <h6><b>Maintenance Reocrds:</b></h6>
+                <h6><b>Maintenance Records:</b></h6>
                 <?php
                    $epid = $_GET['equipid'];
                     echo "Equipment ID: ".$epid."</br>";
@@ -203,9 +203,10 @@ $db_conn = dbConnect();
                             $cols = array("Record ID", "Date", "Pass", "Admin ID");
                             $result = executePlainSQL ("SELECT M.record_id, M.record_date, M.pass, M.admin_id
                                                        FROM Maintenance_Record M
-                                                       WHERE M.equipment_id = $epid");
+                                                       WHERE M.equipment_id = $epid
+                                                       ORDER BY M.record_date");
                             printTable($result, $cols);
-                        } elseif ($epid != NULL){
+                        }   elseif ($epid != NULL){
                             echo "invalid input...</br>";
                         }
                     }
@@ -213,9 +214,11 @@ $db_conn = dbConnect();
                 ?>
 
                 </br> <!-- Form for inserting a maintenance record -->
-                <h6><b>Add New Maintenance Reocrd:</b></h6>
+                <h6><b>Add New Maintenance Record:</b></h6>
                 <form method= "GET" action="maintenanceRecordQuery.php">
-                    <p><font size="3" color=black> 
+                    <p><font size="3" color=black>
+                        Record ID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="number" name="recordid"></br>
                         Equipment ID: &nbsp;&nbsp;
                             <input type="number" name="equipid"> </br>
                         Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -231,23 +234,25 @@ $db_conn = dbConnect();
                     <input type="submit" value="Add" name="insert_mrecord"></p>
                 </form>
                 <?php
-                    $recordid = $_POST['recordid'];
-                    $equipid = $_POST['equipid'];
-                    $date = $_POST['date'];
-                    $adminid = $_POST['adminid'];
-                    $pass = $_POST['pass'];
-                    if ($pass == True){
-                        $pass = '1';
-                    } else {
-                        $pass = '0';
-                    }
+                    $recordid = $_GET['recordid'];
+                    $equipid = $_GET['equipid'];
+                    $recorddate = $_GET['date'];
+                    $adminid = $_GET['adminid'];
+                    $pass = $_GET['pass'];
+                    
                     if ($db_conn) {
-                        if (array_key_exists('insert_mrecord', $_POST)) {
-                            executePlainSQL ("INSERT INTO Maintenance_Record VALUES
-                                             ('$recordid', DATE '$date', '$pass', $adminid, '$equipid')");
-                            executePlainSQL ("COMMIT WORK");
+                        if (array_key_exists('insert_mrecord', $_GET)) {
+                            if ($_GET['pass']=="true"){
+                                    executePlainSQL ("INSERT INTO Maintenance_Record VALUES
+                                             ('$recordid', DATE '$recorddate', '0', $adminid, '$equipid')");
+                                    executePlainSQL ("COMMIT WORK");
+                            }else{
+                                executePlainSQL ("INSERT INTO Maintenance_Record VALUES
+                                             ('$recordid', DATE '$recorddate', '1', $adminid, '$equipid')");
+                                    executePlainSQL ("COMMIT WORK");
+                            }
                         }
-                    }x`
+                    }
                 ?>
 
             </div>
