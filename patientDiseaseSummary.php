@@ -195,7 +195,7 @@ $db_conn = dbConnect();
                 ?>
 
                 <h5><b>Number of total diseases by patient</b></h5>
-                
+                <p><font size="3" color=black>The table summarizes the number of disease for each patient.</p>
                 <?php
                     // call function here
                     if ($db_conn) {

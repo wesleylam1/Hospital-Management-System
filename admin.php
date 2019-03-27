@@ -178,7 +178,6 @@ $db_conn = dbConnect();
             <a href="equipmentQuery.php">Equipment Query</a>
             <a href="maintenanceRecordQuery.php">Maintenance Record Query</a>
             <a href="equipmentPurchaseSummary.php">Equipment Purchase Summary</a>
-            <a href="patientDiseaseSummary.php">Patient Disease Summary</a>
             <a href="patientList.php">Patient List</a>
         </div>
             <div class="main">
