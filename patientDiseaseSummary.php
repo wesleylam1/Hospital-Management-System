@@ -193,24 +193,28 @@ $db_conn = dbConnect();
                     <input type="submit" value="submit" name="patientdiseasequery"></p>
                 </form>
 
-                <h6></br>The table below summarizes the number of patients diagnosed with each disease.</h6>
+                <h6></br>The table below summarizes the number of patients diagnosed with the given disease.</h6>
                 <h5><b>Patient Disease Summary</b></h5>
                 
                 <?php
                     // call function here
-                    $table1 = NULL;
-                    printTable($table1, array("Disease Name", "Number of Patients"));
+                    $dname = $_GET['diseasenm'];
+                    echo "Input Disease Name: ".$dname."</br>";
+                    if ($db_conn) {
+                        if (array_key_exists('patientdiseasequery', $_GET)) {
+                            $table1 = executePlainSQL("SELECT count(*) FROM Has_Disease WHERE disease_name='$dname'");
+                            printTable($table1, array("Number of Patients"));
+                        }
+                    }
                 ?>
 
                 <h5></br><b>List of Patients</b></h5>
                 <?php
-                    $diseasenm = $_GET['diseasenm'];
-                    echo "Input Disease Name: ".$diseasenm."</br>";
-                    $table2 = NULL;
+                    echo "Input Disease Name: ".$dname."</br>";
                     if ($db_conn) {
                         if (array_key_exists('patientdiseasequery', $_GET)) {
                             $cols = array("Patient ID", "Name", "Age", "Cured (0-False, 1-True)");
-                            // call function here
+                            $table2 = executePlainSQL("SELECT id, name, age, cured FROM Has_Disease, Patient WHERE Patient.id = Has_Disease.patient_id and disease_name='$dname'");
                             
                             printTable($table2, $cols);
                         } elseif ($diseasenm != NULL){

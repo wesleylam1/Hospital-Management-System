@@ -313,7 +313,7 @@ $db_conn = dbConnect();
                     $pid1 = $_POST['patientid'];
                     $dname1 = $_POST['diseasenm'];
                     $condition = $_POST['cured'];
-                    if ($condition == True) {
+                    if ($condition == "true") {
                         $condition = '1';
                     } else {
                         $condition = '0';
