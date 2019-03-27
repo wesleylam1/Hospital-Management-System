@@ -147,6 +147,27 @@ INSERT INTO Nurse
 VALUES (3003, 'Shakir Leblanc', '778 120 9482', '2309 Main St, Vancouver, BC V6B 1A9', 'Oncology');
 INSERT INTO Nurse
 VALUES (3004, 'Aubrey Mitchell', '778 435 0921', '1209 Apple St, Vancouver, BC V5A 1Z2', 'Cardiology');
+	       
+DROP TABLE Maintenance_Record CASCADE CONSTRAINTS;  
+CREATE TABLE Maintenance_Record(
+	record_id INTEGER PRIMARY KEY,
+	record_date DATE NOT NULL,
+	pass CHAR(1) NOT NULL,
+	admin_id INTEGER NOT NULL,
+	equipment_id INTEGER NOT NULL,
+	FOREIGN KEY(equipment_id) REFERENCES Equipment(id) ON DELETE CASCADE,
+	FOREIGN KEY(admin_id) REFERENCES Admin(id) ON DELETE SET NULL);
+
+INSERT INTO Maintenance_Record
+VALUES (1000, DATE '2019-01-01', '1', 2000, 1000);
+INSERT INTO Maintenance_Record
+VALUES (1001, DATE '2019-01-01', '1', 2000, 1001);
+INSERT INTO Maintenance_Record
+VALUES (1002, DATE '2019-01-01', '1', 2001, 1002);
+INSERT INTO Maintenance_Record
+VALUES (1003, DATE '2019-01-01', '0', 2002, 1003);
+INSERT INTO Maintenance_Record
+VALUES (1004, DATE '2019-01-01', '1', 2002, 1004);
     
 DROP TABLE Room CASCADE CONSTRAINTS;
 CREATE TABLE Room (
