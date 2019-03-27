@@ -199,7 +199,7 @@ $db_conn = dbConnect();
                 <?php
                     // call function here
                     if ($db_conn) {
-                        $table2 = executePlainSQL("SELECT patient_id, count(*) FROM Has_Disease GROUP BY patient_id ");
+                        $table2 = executePlainSQL("SELECT p.id, count(disease_name) FROM Has_Disease RIGHT OUTER JOIN patient p ON p.id = Has_Disease.patient_id GROUP BY p.id ");
                         printTable($table2, array("Patient ID", "Count"));
                     }
                 ?>

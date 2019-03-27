@@ -10,20 +10,38 @@ CREATE TABLE Patient(
 	UNIQUE(name, phone));
     
 INSERT INTO Patient
-VALUES (100, '9999 212 909', 'John Hanks', 35, '1234 Robson St, Vancouver, BC V7Y 0A2', '778 909 1232',
+VALUES (100, '9999 212 909', 'John Hanks', 41, '1234 Robson St, Vancouver, BC V7Y 0A2', '778 909 1232',
 '604 211 2211');
 INSERT INTO Patient
-VALUES (101, '9000 788 500', 'Emily Brown', 60, '1000 Mathers Ave, West Vancouver, BC V7V 2G7', '778
+VALUES (101, '9000 788 500', 'Emily Brown', 61, '1000 Mathers Ave, West Vancouver, BC V7V 2G7', '778
 398 2233', '778 888 3910');
 INSERT INTO Patient
-VALUES (102, '9899 255 444', 'Tommy Lee', 12, '6400 Hawke Ave, Vancouver, BC V6R 2C9', '778 556
+VALUES (102, '9899 255 444', 'Tommy Lee', 33, '6400 Hawke Ave, Vancouver, BC V6R 2C9', '778 556
 0000', '604 234 9190');
 INSERT INTO Patient
-VALUES (103, '9989 299 144', 'Michelle Smith', 55, '1011 Richards St, Vancouver, BC V7B 0A2', '604 123
+VALUES (103, '9989 299 144', 'Michelle Smith', 29, '1011 Richards St, Vancouver, BC V7B 0A2', '604 123
 5577', '604 778 2332');
 INSERT INTO Patient
-VALUES (104, '9123 098 230', 'Jill Garcia', 78, '5000 Main St, Vancouver, BC V6B 1A9', '778 387 5321',
+VALUES (104, '9123 098 230', 'Jill Garcia', 25, '5000 Main St, Vancouver, BC V6B 1A9', '778 387 5321',
 '604 239 8109');
+INSERT INTO Patient
+VALUES (105, '8123 098 231', 'Tommy Haverford', 91, '5010 Science St, Pawnee, BC V9X 1C7', '778 912 0012',
+'604 244 4001');
+INSERT INTO Patient
+VALUES (106, '2123 098 232', 'Kevin Malone', 78, '4300 Happy St, Scranton, BC V2X 2C2', '778 212 2013',
+'604 254 5505');
+INSERT INTO Patient
+VALUES (107, '9323 098 233', 'Andy Bernard', 51, '433 Pleasant St, Scranton, BC V0X 0X1', '604 312 3014',
+'604 353 3535');
+INSERT INTO Patient
+VALUES (108, '6126 698 261', 'Kelly Kapoor', 40, '890 Business St, Maple Ridge, BC V3X 3C0', '778 662 6613',
+'604 654 6505');
+INSERT INTO Patient
+VALUES (109, '5123 598 535', 'Pamala Beesley', 91, '9123 Park St, Victoria, BC V2P 2P3', '778 222 3813',
+'604 854 5885');
+INSERT INTO Patient
+VALUES (110, '6663 698 535', 'Jim Halpert', 55, '555 Beach St, Naniamo, BC V3C 3C3', '778 555 8818',
+'604 774 5875');
     
 DROP TABLE Disease CASCADE CONSTRAINTS;
 CREATE TABLE Disease(name CHAR(50) PRIMARY KEY);
@@ -35,6 +53,9 @@ INSERT INTO Disease VALUES ('Liver Cancer');
 INSERT INTO Disease VALUES ('Chickenpox');
 INSERT INTO Disease VALUES ('Mental Illness');
 INSERT INTO Disease VALUES ('Liver Cancer Stage 2');
+INSERT INTO Disease VALUES ('Seasonal Flu');
+INSERT INTO Disease VALUES ('ADHD');
+INSERT INTO Disease VALUES ('Autism');
     
 DROP TABLE Has_Disease CASCADE CONSTRAINTS;
 CREATE TABLE Has_Disease(
@@ -52,7 +73,24 @@ INSERT INTO Has_Disease VALUES('Chickenpox', '0', 102);
 INSERT INTO Has_Disease VALUES('Type I Diabetes', '0', 103);
 INSERT INTO Has_Disease VALUES('Type I Diabetes', '0', 100); 
 INSERT INTO Has_Disease VALUES('Alzheimers Disease', '0', 104);
-	
+INSERT INTO Has_Disease VALUES('Chickenpox', '1', 105);
+INSERT INTO Has_Disease VALUES('Mental Illness', '0', 105);
+INSERT INTO Has_Disease VALUES('Liver Cancer Stage 2', '0', 106);
+INSERT INTO Has_Disease VALUES('Seasonal Flu', '0', 107);
+INSERT INTO Has_Disease VALUES('Mental Illness', '0', 107);
+INSERT INTO Has_Disease VALUES('ADHD', '0', 108);
+INSERT INTO Has_Disease VALUES('Seasonal Flu', '1', 108);
+INSERT INTO Has_Disease VALUES('Autism', '0', 109);
+INSERT INTO Has_Disease VALUES('ADHD', '0', 109);
+INSERT INTO Has_Disease VALUES('Seasonal Flu', '0', 109);
+INSERT INTO Has_Disease VALUES('Liver Cancer Stage 2', '0', 109);
+INSERT INTO Has_Disease VALUES('Mental Illness', '0', 109);
+INSERT INTO Has_Disease VALUES('Chickenpox', '1', 109);
+INSERT INTO Has_Disease VALUES('Liver Cancer', '0', 109);
+INSERT INTO Has_Disease VALUES('Cardiovascular Disease', '1', 109);
+INSERT INTO Has_Disease VALUES('Type I Diabetes', '0', 109);
+INSERT INTO Has_Disease VALUES('Alzheimers Disease', '0', 109);
+
 DROP TABLE Doctor CASCADE CONSTRAINTS;
 CREATE TABLE Doctor (
 	id INTEGER PRIMARY KEY,
@@ -77,6 +115,17 @@ VALUES (1003, 'Amy Whittle', '778 109 2491', '5819 Graham St, Vancouver, BC V9A 
 'Infection Control');
 INSERT INTO Doctor
 VALUES (1004, 'Tim Watsons', '778 129 8419', '1209 Renfrew St, Vancouver, BC V1T 1S3', 'Alzheimers
+Disease', 'Elderly Services');
+INSERT INTO Doctor
+VALUES (1005, 'Tim Poke', '778 229 8319', '1209 Nickel St, Vancouver, BC V2K 5X3', 'Mental Illness', 'Mental Health');
+INSERT INTO Doctor
+VALUES (1006, 'Jim Cow', '738 129 8419', '1209 Happy St, Vancouver, BC V3K 1P3', 'Seasonal Viruses', 'Infection Control');
+INSERT INTO Doctor
+VALUES (1007, 'Ishan Sohal', '814 139 3419', '1209 Mildew St, Vancouver, BC V1C 1C7', 'ADHD', 'Mental Health');
+INSERT INTO Doctor
+VALUES (1008, 'Kanna Ken', '604 729 7312', '1209 Rainer St, Vancouver, BC V9T 8J9', 'Autism', 'Mental Health');
+INSERT INTO Doctor
+VALUES (1009, 'Mickey Stanley', '604 646 7483', '1209 Baker St, Vancouver, BC V6T 1B3', 'Alzheimers
 Disease', 'Elderly Services');
     
 DROP TABLE Nurse CASCADE CONSTRAINTS;
@@ -122,6 +171,8 @@ INSERT INTO Room
 VALUES ('Meeting room', 'Elderly Services', 400, '1');
 INSERT INTO Room
 VALUES ('Meeting room', 'Infection Control', 500, '1');
+INSERT INTO Room
+VALUES ('Meeting room', 'Mental Illness', 100, '1');
     
 DROP TABLE AssignTo CASCADE CONSTRAINTS;
 CREATE TABLE AssignTo (
@@ -182,6 +233,22 @@ hh24:mi:ss'), TO_DATE('2019-05-20 12:30:00', 'yyyy/mm/dd hh24:mi:ss'));
 INSERT INTO Appointment
 VALUES (104, 1004, 'Elderly Services', 400, TO_DATE('2019-05-20 14:30:00', 'yyyy/mm/dd hh24:mi:ss'),
 TO_DATE('2019-05-20 15:30:00', 'yyyy/mm/dd hh24:mi:ss'));
+INSERT INTO Appointment
+VALUES (105, 1007, 'Mental Illness', 100, TO_DATE('2019-06-20 14:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+TO_DATE('2019-06-20 15:30:00', 'yyyy/mm/dd hh24:mi:ss'));
+INSERT INTO Appointment
+VALUES (106, 1001, 'Oncology', 200, TO_DATE('2019-09-20 14:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+TO_DATE('2019-09-20 15:30:00', 'yyyy/mm/dd hh24:mi:ss'));
+INSERT INTO Appointment
+VALUES (107, 1005, 'Mental Illness', 100, TO_DATE('2019-09-20 13:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+TO_DATE('2019-09-20 14:30:00', 'yyyy/mm/dd hh24:mi:ss'));
+INSERT INTO Appointment
+VALUES (108, 1006, 'Infection Control', 500, TO_DATE('2019-09-21 13:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+TO_DATE('2019-09-21 14:30:00', 'yyyy/mm/dd hh24:mi:ss'));
+INSERT INTO Appointment
+VALUES (109, 1006, 'Elderly Services', 400, TO_DATE('2019-04-15 13:30:00', 'yyyy/mm/dd hh24:mi:ss'),
+TO_DATE('2019-04-15 14:30:00', 'yyyy/mm/dd hh24:mi:ss'));
+
     
 DROP TABLE Equipment1 CASCADE CONSTRAINTS;
 CREATE TABLE Equipment1(
@@ -312,17 +379,29 @@ CREATE TABLE Treatment_History (
 INSERT INTO Treatment_History
 VALUES (1, DATE '2019-02-01', 'Patient had chemotherapy', 100);
 INSERT INTO Treatment_History
-VALUES (6, DATE '2019-02-15', 'Patient had surgery to remove tumour', 100);
+VALUES (2, DATE '2019-02-15', 'Patient had surgery to remove tumour', 100);
 INSERT INTO Treatment_History
-VALUES (7, DATE '2019-03-30', 'Patient came for monthly cancer relapse checkup', 100);
+VALUES (3, DATE '2019-03-30', 'Patient came for monthly cancer relapse checkup', 100);
 INSERT INTO Treatment_History
-VALUES (2, DATE '2019-01-10', 'Prescribed medications for cardiovascular disease', 101);
+VALUES (4, DATE '2019-01-10', 'Prescribed medications for cardiovascular disease', 101);
 INSERT INTO Treatment_History
-VALUES (3, DATE '2019-01-15', 'Prescribed antibiotics for chickenpox', 102);
+VALUES (5, DATE '2019-01-15', 'Prescribed antibiotics for chickenpox', 102);
 INSERT INTO Treatment_History
-VALUES (4, DATE '2019-02-03', 'Treated with insulin', 103);
+VALUES (6, DATE '2019-02-03', 'Treated with insulin', 103);
 INSERT INTO Treatment_History
-VALUES (5, DATE '2019-02-05', 'Prescribed with Razadyne', 104);
+VALUES (7, DATE '2019-02-05', 'Prescribed with Razadyne', 104);
+INSERT INTO Treatment_History
+VALUES (8, DATE '2019-02-05', 'Prescribed with Razadyne', 104);
+INSERT INTO Treatment_History
+VALUES (9, DATE '2019-02-05', 'Discussed anxiety triggers and gave citalopram', 105);
+INSERT INTO Treatment_History
+VALUES (10, DATE '2019-03-05', 'Discussed Cancer and prescribed Tylenol 2', 106);
+INSERT INTO Treatment_History
+VALUES (11, DATE '2019-04-03', 'Prescribed Codeine for flu symptoms', 107);
+INSERT INTO Treatment_History
+VALUES (12, DATE '2019-06-15', 'Prescribed with Ritalin', 108);
+INSERT INTO Treatment_History
+VALUES (13, DATE '2019-10-01', 'Given severe patient conditions, prescribed opiums', 109);
     
 DROP TABLE Prescription1 CASCADE CONSTRAINTS;
 CREATE TABLE Prescription1 (
@@ -341,6 +420,16 @@ INSERT INTO Prescription1
 VALUES ('Insulin glulisine', 600, 250);
 INSERT INTO Prescription1
 VALUES ('Razadyne', 300, 150);
+INSERT INTO Prescription1
+VALUES ('Ritalin', 60, 55);
+INSERT INTO Prescription1
+VALUES ('Opium', 150, 100);
+INSERT INTO Prescription1
+VALUES ('Codeine', 10, 5);
+INSERT INTO Prescription1
+VALUES ('Citalopram', 7, 37.99);
+INSERT INTO Prescription1
+VALUES ('Tylenol 2', 30, 25.01);
     
 DROP TABLE Prescription2 CASCADE CONSTRAINTS;
 CREATE TABLE Prescription2 (
@@ -359,6 +448,16 @@ INSERT INTO Prescription2
 VALUES (30, 20, 600);
 INSERT INTO Prescription2
 VALUES (10, 30, 300);
+INSERT INTO Prescription2
+VALUES (2, 30, 60);
+INSERT INTO Prescription2
+VALUES (5, 30, 150);
+INSERT INTO Prescription2
+VALUES (1, 10, 10);
+INSERT INTO Prescription2
+VALUES (1, 7, 7);
+INSERT INTO Prescription2
+VALUES (3, 10, 30);
 
 DROP TABLE Prescription CASCADE CONSTRAINTS;
 CREATE TABLE Prescription (
@@ -378,8 +477,18 @@ VALUES ('Benazepril', 5, 1, 30, 1);
 INSERT INTO Prescription
 VALUES ('Zovirax', 0, 3, 15, 2);
 INSERT INTO Prescription
-VALUES ('Insulin glulisine', 2, 30, 20, 3);
+VALUES ('Insulin glulisine', 2, 30, 20, 6);
 INSERT INTO Prescription
-VALUES ('Razadyne', 0, 10, 30, 4);
+VALUES ('Razadyne', 0, 10, 30, 7);
+INSERT INTO Prescription
+VALUES ('Ritalin', 0, 2, 30, 12);
+INSERT INTO Prescription
+VALUES ('Opium', 0, 5, 30, 13);
+INSERT INTO Prescription
+VALUES ('Codein', 0, 1, 10, 11);
+INSERT INTO Prescription
+VALUES ('Citalopram', 0, 1, 7, 9);
+INSERT INTO Prescription
+VALUES ('Tylenol 2', 0, 3, 10, 10);
 
 commit;

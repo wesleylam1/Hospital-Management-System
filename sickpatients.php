@@ -197,10 +197,10 @@ $db_conn = dbConnect();
                     if ($db_conn) {
                         if (array_key_exists('sickpatients', $_GET)) {
                             $cols = array("Patient ID", "Name");
-                            $table1 = executePlainSQL("SELECT p.id, p.name FROM patients p
+                            $table1 = executePlainSQL("SELECT p.id, p.name FROM patient p
                                 WHERE p.age >= $age and not exists (
                                     (SELECT d.name FROM Disease d)
-                                    except
+                                    MINUS
                                     (SELECT hd.disease_name FROM Has_Disease hd WHERE hd.patient_id = p.id)
                                 )
                             ");
