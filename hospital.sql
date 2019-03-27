@@ -203,13 +203,13 @@ INSERT INTO Maintenance_Record
 VALUES (1004, DATE '2019-01-01', '1', 2002, 1004);
 INSERT INTO Maintenance_Record
 VALUES (1005, DATE '2019-02-11', '1', 2007, 1005);
-NSERT INTO Maintenance_Record
+INSERT INTO Maintenance_Record
 VALUES (1006, DATE '2019-01-11', '1', 2003, 1006);
-NSERT INTO Maintenance_Record
+INSERT INTO Maintenance_Record
 VALUES (1007, DATE '2019-02-22', '1', 2004, 1007);
-NSERT INTO Maintenance_Record
+INSERT INTO Maintenance_Record
 VALUES (1008, DATE '2019-03-10', '0', 2005, 1008);
-NSERT INTO Maintenance_Record
+INSERT INTO Maintenance_Record
 VALUES (1009, DATE '2016-10-14', '1', 2006, 1009);
     
 DROP TABLE Room CASCADE CONSTRAINTS;
