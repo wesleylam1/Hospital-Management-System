@@ -177,10 +177,10 @@ $db_conn = dbConnect();
                     </div>
             </div>
             <a href="patientQuery.php">Patient Query</a>
-            <a href="patientUpdate.php">Patient Update</a>
             <a href="patientList.php">Patient List</a>
             <a href="patientDiseaseSummary.php">Patient Disease Summary</a>
-            <a href="sickpatients.php">Sickly Patient</a>
+            <a href="sickpatients.php">Sickly Patients</a>
+            <a href="patientUpdate.php">Patient Update</a>
         </div>
             <div class="main">
                 <h3><b>Update Patient Records</b><h3>
