@@ -183,14 +183,6 @@ $db_conn = dbConnect();
         </div>
         <div class="main">
                 <h3><b>Patient Disease Summary</b><h3>
-                <h6>This query will generate a list of patients who are diagnosed with the given disease. 
-                </h6>
-
-                <h6>Please enter the disease name:</h6>
-                <form method= "GET" action="patientDiseaseSummary.php">
-                    <p><font size="3" color=black> Disease name: <input type="text" value="" name="diseasenm"> 
-                    <input type="submit" value="submit" name="patientdiseasequery"></p>
-                </form>
 
                 <h5><b>Number of patients who presently have an uncured disease</b></h5>
                 
@@ -209,21 +201,6 @@ $db_conn = dbConnect();
                     if ($db_conn) {
                         $table2 = executePlainSQL("SELECT patient_id, count(*) FROM Has_Disease GROUP BY patient_id ");
                         printTable($table2, array("Patient ID", "Count"));
-                    }
-                ?>
-
-                <h5></br><b>List of Patients</b></h5>
-                <?php
-                    echo "Input Disease Name: ".$dname."</br>";
-                    if ($db_conn) {
-                        if (array_key_exists('patientdiseasequery', $_GET)) {
-                            $cols = array("Patient ID", "Name", "Age", "Cured (0-False, 1-True)");
-                            $table2 = executePlainSQL("SELECT id, name, age, cured FROM Has_Disease, Patient WHERE Patient.id = Has_Disease.patient_id and disease_name='$dname'");
-                            
-                            printTable($table2, $cols);
-                        } elseif ($diseasenm != NULL){
-                            echo "invalid input...</br>";
-                        }
                     }
                 ?>
 
