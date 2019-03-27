@@ -147,6 +147,29 @@ INSERT INTO Nurse
 VALUES (3003, 'Shakir Leblanc', '778 120 9482', '2309 Main St, Vancouver, BC V6B 1A9', 'Oncology');
 INSERT INTO Nurse
 VALUES (3004, 'Aubrey Mitchell', '778 435 0921', '1209 Apple St, Vancouver, BC V5A 1Z2', 'Cardiology');
+
+DROP TABLE Admin CASCADE CONSTRAINTS;
+CREATE TABLE Admin (
+	id INTEGER PRIMARY KEY,
+	name CHAR(50) NOT NULL,
+	phone CHAR(50) NOT NULL,
+	address CHAR(50),
+	department CHAR(50),
+	UNIQUE(name, phone));
+
+INSERT INTO Admin
+VALUES (2000, 'Bob Ma', '778 120 9804', '2398 Mainland St, Vancouver, BC V4R 1D7', 'Cardiology');
+INSERT INTO Admin
+VALUES (2001, 'Will Banks', '604 509 8325', '1092 Hastings St, Vancouver, BC V2A 1B2', 'Oncology');
+INSERT INTO Admin
+VALUES (2002, 'Ariel Gordon', '604 792 1029', '6789 Hazelbridge Way St, Vancouver, BC V6X 4J7',
+'Nutrition and Dietetics');
+INSERT INTO Admin
+VALUES (2003, 'Susan Tate', '778 289 7323', '4219 Graham St, Vancouver, BC V2C 1T6', 'Infection
+Control');
+INSERT INTO Admin
+VALUES (2004, 'Ciara Conley', '778 129 8419', '6459 Robson St, Vancouver, BC V7Y 0A1', 'Elderly
+Services');
 	       
 DROP TABLE Maintenance_Record CASCADE CONSTRAINTS;  
 CREATE TABLE Maintenance_Record(
