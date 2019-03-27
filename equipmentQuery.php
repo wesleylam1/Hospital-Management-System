@@ -190,8 +190,7 @@ $db_conn = dbConnect();
                     		$result = executePlainSQL("SELECT e.name, e.brand, e1.usage, e.purchase_date, e.price, e2.manufactured_in, e3.customer_support_number
                                                       FROM Equipment e, Equipment1 e1, Equipment2 e2, Equipment3 e3
                                                       WHERE e.brand = e3.brand AND e.name = e1.name AND e.name = e2.name AND e.brand = e2.brand AND e.id = $epid");
-                            //$epid = $_GET['equipmentid'];
-                            //echo "Equipment ID: ".$epid."</br>";
+                            
                             printTable($result, $cols);
                         }
                     }
