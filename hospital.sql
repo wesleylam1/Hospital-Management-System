@@ -170,6 +170,16 @@ Control');
 INSERT INTO Admin
 VALUES (2004, 'Ciara Conley', '778 129 8419', '6459 Robson St, Vancouver, BC V7Y 0A1', 'Elderly
 Services');
+INSERT INTO Admin
+VALUES (2005, 'Cindy Brown', '778 883 2876', '2485 Broadway W, Vancouver, BC V6K 2E8', 'Cardiology');
+INSERT INTO Admin
+VALUES (2006, 'Jay Smith', '604 254 1344', '563 Union St, Vancouver, BC V6A 2B7', 'Nutrition and Dietetics');
+INSERT INTO Admin
+VALUES (2007, 'Jennie Wong', '604 876 8544', '1949 Comox St 305, Vancouver, BC V6G 1R7', 'Oncology');
+INSERT INTO Admin
+VALUES (2008, 'Shamus Menard', '778 895 2133', '1410 Tolmie St, Vancouver, BC V6R 4B3', 'Oncology');
+INSERT INTO Admin
+VALUES (2009, 'Aidan Menard', '778 345 2133', '5980 Battison St, Vancouver, BC V5R 4M8', 'Infection Control');
 	       
 DROP TABLE Maintenance_Record CASCADE CONSTRAINTS;  
 CREATE TABLE Maintenance_Record(
@@ -191,6 +201,16 @@ INSERT INTO Maintenance_Record
 VALUES (1003, DATE '2019-01-01', '0', 2002, 1003);
 INSERT INTO Maintenance_Record
 VALUES (1004, DATE '2019-01-01', '1', 2002, 1004);
+INSERT INTO Maintenance_Record
+VALUES (1005, DATE '2019-02-11', '1', 2007, 1005);
+NSERT INTO Maintenance_Record
+VALUES (1006, DATE '2019-01-11', '1', 2003, 1006);
+NSERT INTO Maintenance_Record
+VALUES (1007, DATE '2019-02-22', '1', 2004, 1007);
+NSERT INTO Maintenance_Record
+VALUES (1008, DATE '2019-03-10', '0', 2005, 1008);
+NSERT INTO Maintenance_Record
+VALUES (1009, DATE '2016-10-14', '1', 2006, 1009);
     
 DROP TABLE Room CASCADE CONSTRAINTS;
 CREATE TABLE Room (
