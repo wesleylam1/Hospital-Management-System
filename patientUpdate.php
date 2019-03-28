@@ -206,14 +206,15 @@ $db_conn = dbConnect();
                     $endtime = $date . ' ' . $_POST['endtime'];
                     $roomdept = $_POST['roomdpmt'];
                     $roomnum = $_POST['roomnum'];
-                    
-                    if ($db_conn) {
-                        if (array_key_exists('insertappointment', $_POST)) {
-                            executePlainSQL("INSERT INTO Appointment
-                            VALUES ($patientid, $doctorid, '$roomdept', $roomnum, TO_DATE ('$starttime', 'yyyy/mm/dd hh24:mi:ss'),
-                            TO_DATE('$endtime', 'yyyy-mm-dd hh24:mi:ss'))");
-                            
-                            executePlainSQL("COMMIT WORK");
+                    if ($doctorid && $patientid && $date && $starttime && $endtime && $roomdept && $roomnum){
+                        if ($db_conn) {
+                            if (array_key_exists('insertappointment', $_POST)) {
+                                executePlainSQL("INSERT INTO Appointment
+                                VALUES ($patientid, $doctorid, '$roomdept', $roomnum, TO_DATE ('$starttime', 'yyyy/mm/dd hh24:mi:ss'),
+                                TO_DATE('$endtime', 'yyyy-mm-dd hh24:mi:ss'))");
+                                
+                                executePlainSQL("COMMIT WORK");
+                            }
                         }
                     }
                 ?>
@@ -259,13 +260,15 @@ $db_conn = dbConnect();
                     $duration = $_POST['duration'];
                     $price = $_POST['price'];
 
-                    if ($db_conn) {
-                        if (array_key_exists('inserttreatment', $_POST)) {
-                            executePlainSQL("INSERT INTO Treatment_History VALUES ($id1, DATE '$date1', '$medicalnotes1', $patientid1)");
-                            executePlainSQL("INSERT INTO Prescription1 VALUES ('$drugname', $totalamt, $price)");
-                            executePlainSQL("INSERT INTO Prescription2 VALUES ($dosage, $duration, $totalamt)");
-                            executePlainSQL("INSERT INTO Prescription VALUES ('$drugname', $refills, $dosage, $duration, $id1)");
-                            executePlainSQL("COMMIT WORK");
+                    if ($patientid1 && $date1 && $medicalnotes1 && $id1 && $drugname && $dosage && $refills && $totalamt && $duration && $price){
+                        if ($db_conn) {
+                            if (array_key_exists('inserttreatment', $_POST)) {
+                                executePlainSQL("INSERT INTO Treatment_History VALUES ($id1, DATE '$date1', '$medicalnotes1', $patientid1)");
+                                executePlainSQL("INSERT INTO Prescription1 VALUES ('$drugname', $totalamt, $price)");
+                                executePlainSQL("INSERT INTO Prescription2 VALUES ($dosage, $duration, $totalamt)");
+                                executePlainSQL("INSERT INTO Prescription VALUES ('$drugname', $refills, $dosage, $duration, $id1)");
+                                executePlainSQL("COMMIT WORK");
+                            }
                         }
                     }
                 ?>
@@ -288,10 +291,12 @@ $db_conn = dbConnect();
                     $dname = $_POST['oldnm'];
                     $newname = $_POST['newnm'];
 
-                    if ($db_conn) {
-                        if (array_key_exists('updatediseasename', $_POST)) {
-                            executePlainSQL("UPDATE Has_Disease SET disease_name='$newname' WHERE disease_name='$dname' AND patient_id=$pid");
-                            executePlainSQL("COMMIT WORK");
+                    if ($pid && $dname && $newname){
+                        if ($db_conn) {
+                            if (array_key_exists('updatediseasename', $_POST)) {
+                                executePlainSQL("UPDATE Has_Disease SET disease_name='$newname' WHERE disease_name='$dname' AND patient_id=$pid");
+                                executePlainSQL("COMMIT WORK");
+                            }
                         }
                     }
                     
@@ -315,16 +320,18 @@ $db_conn = dbConnect();
                     $pid1 = $_POST['patientid'];
                     $dname1 = $_POST['diseasenm'];
                     $condition = $_POST['cured'];
-                    if ($condition == "true") {
-                        $condition = '1';
-                    } else {
-                        $condition = '0';
-                    }
-                    
-                    if ($db_conn) {
-                        if (array_key_exists('updatediseasecondition', $_POST)) {
-                            executePlainSQL("UPDATE Has_Disease SET cured='$condition' WHERE disease_name='$dname1' AND patient_id=$pid1");
-                            executePlainSQL("COMMIT WORK");
+                    if ($pid1 && $dname1 && $condition){
+                        if ($condition == "true") {
+                            $condition = '1';
+                        } else {
+                            $condition = '0';
+                        }
+                        
+                        if ($db_conn) {
+                            if (array_key_exists('updatediseasecondition', $_POST)) {
+                                executePlainSQL("UPDATE Has_Disease SET cured='$condition' WHERE disease_name='$dname1' AND patient_id=$pid1");
+                                executePlainSQL("COMMIT WORK");
+                            }
                         }
                     }
                 ?>
