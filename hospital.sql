@@ -147,6 +147,16 @@ INSERT INTO Nurse
 VALUES (3003, 'Shakir Leblanc', '778 120 9482', '2309 Main St, Vancouver, BC V6B 1A9', 'Oncology');
 INSERT INTO Nurse
 VALUES (3004, 'Aubrey Mitchell', '778 435 0921', '1209 Apple St, Vancouver, BC V5A 1Z2', 'Cardiology');
+INSERT INTO Nurse
+VALUES (3005, 'Julie Simons', '778 999 4444', '1219 Eagle St, Vancouver, BC V5A 1B2', 'Elderly Services');
+INSERT INTO Nurse
+VALUES (3006, 'Mike Li', '604 232 2222', '5009 North St, Vancouver, BC V6Z 1T2', 'Nutrition and Dietetics');
+INSERT INTO Nurse
+VALUES (3007, 'Sally Jess', '604 811 1233', '2900 Hawke St, Vancouver, BC V3R 2C9', 'Infection Control');
+INSERT INTO Nurse
+VALUES (3008, 'Miley Smith', '778 312 4827', '7887 West St, Vancouver, BC V6Y 4C2', 'Mental Illness');
+INSERT INTO Nurse
+VALUES (3009, 'Jacob Hortons', '778 929 2736', '4500 Dale St, Vancouver, BC V9A 2J4', 'Cardiology');
 
 DROP TABLE Admin CASCADE CONSTRAINTS;
 CREATE TABLE Admin (
