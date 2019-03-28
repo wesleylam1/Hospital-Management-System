@@ -185,7 +185,6 @@ $db_conn = dbConnect();
                 <?php
                     $cols = array("Room Department", "Room Number");
                     if ($_GET['roomtype'] == "true") {
-                        //$cols = array("Room Department", "Room Number", "Room Type");
                         $cols = array("Room Department", "Room Number", "Type");
                     }
                     if ($db_conn) {
