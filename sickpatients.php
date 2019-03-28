@@ -198,13 +198,12 @@ $db_conn = dbConnect();
                         if (array_key_exists('sickpatients', $_GET)) {
                             $cols = array("Patient ID", "Name");
                             $table1 = executePlainSQL("SELECT p.id, p.name FROM patient p
-                                WHERE p.age >= $age and not exists (
+                                WHERE p.age >= $age AND not exists (
                                     (SELECT d.name FROM Disease d)
                                     MINUS
                                     (SELECT hd.disease_name FROM Has_Disease hd WHERE hd.patient_id = p.id)
                                 )
-                            ");
-                            
+                            ");                
                             printTable($table1, $cols);
                         } elseif ($age != NULL){
                             echo "invalid input...</br>";
@@ -212,10 +211,8 @@ $db_conn = dbConnect();
                     }
                 ?>
 
-
         </div>
-            
-
+        
         </div>
 
         <div class="footer">

@@ -241,13 +241,13 @@ $db_conn = dbConnect();
                     if ($db_conn) {
                         if (array_key_exists('insert_mrecord', $_GET)) {
                             if ($_GET['pass']=="true"){
-                                    executePlainSQL ("INSERT INTO Maintenance_Record VALUES
+                                executePlainSQL ("INSERT INTO Maintenance_Record VALUES
                                              ('$recordid', DATE '$recorddate', '0', $adminid, '$equipid')");
-                                    executePlainSQL ("COMMIT WORK");
+                                executePlainSQL ("COMMIT WORK");
                             }else{
                                 executePlainSQL ("INSERT INTO Maintenance_Record VALUES
                                              ('$recordid', DATE '$recorddate', '1', $adminid, '$equipid')");
-                                    executePlainSQL ("COMMIT WORK");
+                                executePlainSQL ("COMMIT WORK");
                             }
                         }
                     }

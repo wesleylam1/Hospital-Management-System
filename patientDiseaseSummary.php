@@ -187,7 +187,6 @@ $db_conn = dbConnect();
                 <h5><b>Number of patients who presently have an uncured disease</b></h5>
                 
                 <?php
-                    // call function here
                     if ($db_conn) {
                         $table1 = executePlainSQL("SELECT count(DISTINCT patient_id) FROM Has_Disease WHERE cured='0'");
                         printTable($table1, array("Number of Patients"));
@@ -197,19 +196,13 @@ $db_conn = dbConnect();
                 <h5><b>Number of total diseases by patient</b></h5>
                 <p><font size="3" color=black>The table summarizes the number of disease for each patient.</p>
                 <?php
-                    // call function here
                     if ($db_conn) {
                         $table2 = executePlainSQL("SELECT p.id, count(disease_name) FROM Has_Disease RIGHT OUTER JOIN patient p ON p.id = Has_Disease.patient_id GROUP BY p.id ");
                         printTable($table2, array("Patient ID", "Count"));
                     }
                 ?>
-
-
         </div>
-            
-
         </div>
-
         <div class="footer">
             <p>2019 UBC CPSC 304 Group 14</p>
         </div>

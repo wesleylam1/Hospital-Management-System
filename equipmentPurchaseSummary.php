@@ -190,30 +190,24 @@ $db_conn = dbConnect();
                     } else {
                         if ($db_conn) {
                             if (array_key_exists('equipmentpurchasesummaryquery', $_GET)) {
-                                $result = executePlainSQL("SELECT sum(price) as sum FROM Equipment WHERE purchase_date between date'$startdate' and date'$enddate'");
+                                $result = executePlainSQL("SELECT sum(price) AS sum FROM Equipment WHERE purchase_date BETWEEN date'$startdate' AND date'$enddate'");
                                 if ($result == null){
                                     $totalamount = 0;
                                 }else{
                                     $row = Oci_Fetch_Array($result, OCI_BOTH);
                                     $totalamount .= $row["0"];  
-                                }
-                                
+                                }    
                             }
                         }
                     }
                     echo "Start date: $startdate <br>";
                     echo "End date: $enddate <br>";
                     echo "Total equipment purchase amount: $$totalamount <br>";
-                   
-                ?>
-                
+                ?> 
             </div>
-
         </div>
-
         <div class="footer">
             <p>2019 UBC CPSC 304 Group 14</p>
         </div>
     </body>
-
 </html>

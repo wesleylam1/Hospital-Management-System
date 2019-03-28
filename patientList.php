@@ -199,8 +199,6 @@ $db_conn = dbConnect();
                     } else {
                         echo "(You must select at least one field)";
                     }
-
-
                 ?>
 
                 <h5></br><b>Patient Personal Info Query Result</b></h5>

@@ -251,7 +251,6 @@ $db_conn = dbConnect();
                     $eid1 = $_POST['equipmentid_update'];
                     if ($db_conn) {
                         if (array_key_exists('update_equipment', $_POST)) {
-                            // call fn here
                             executePlainSQL("UPDATE Equipment3 SET customer_support_number = '$csphonenum' 
                                             WHERE brand = (SELECT brand e FROM Equipment e WHERE e.brand = brand AND e.id = $eid1)");
                             executePlainSQL("COMMIT WORK");
@@ -270,7 +269,6 @@ $db_conn = dbConnect();
                     $eid = $_POST['equipmentid_del'];
                     if ($db_conn) {
                         if (array_key_exists('delete_equipment', $_POST)) {
-                            // call fn here
                             executePlainSQL("DELETE FROM Equipment WHERE  id=$eid");
                             executePlainSQL("COMMIT WORK");
                         }
