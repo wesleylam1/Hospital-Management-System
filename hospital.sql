@@ -217,9 +217,11 @@ VALUES ('Meeting room', 'Elderly Services', 400, '1');
 INSERT INTO Room
 VALUES ('Meeting room', 'Infection Control', 500, '1');
 INSERT INTO Room
+VALUES ('Surgery room', 'Infection Control', 510, '1');
+INSERT INTO Room
 VALUES ('Meeting room', 'Mental Illness', 100, '1');
 INSERT INTO Room
-VALUES ('Meeting room', 'Mental Illness', 102, '1');
+VALUES ('Surgery room', 'Mental Illness', 110, '1');
     
 DROP TABLE AssignTo CASCADE CONSTRAINTS;
 CREATE TABLE AssignTo (
@@ -256,6 +258,8 @@ INSERT INTO AssignTo
 VALUES (3009, 'Elderly Services', 400);
 INSERT INTO AssignTo
 VALUES (3009, 'Nutrition and Dietetics', 300);
+INSERT INTO AssignTo
+VALUES (3009, 'Infection Control', 510);
     
 DROP TABLE Appointment CASCADE CONSTRAINTS;
 CREATE TABLE Appointment(
