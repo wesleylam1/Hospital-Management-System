@@ -194,6 +194,9 @@ $db_conn = dbConnect();
                
                 <?php
                     $age = $_GET['age'];
+                    if ($age == null){
+                        return;
+                    }
                     if ($db_conn) {
                         if (array_key_exists('sickpatients', $_GET)) {
                             $cols = array("Patient ID", "Name");
