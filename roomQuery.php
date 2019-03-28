@@ -183,6 +183,9 @@ $db_conn = dbConnect();
 
                 <h6><b>Table: List of assigned rooms</b></h6>
                 <?php
+                    if ($nurseid == null){
+                        return;
+                    }
                     $cols = array("Room Department", "Room Number");
                     if ($_GET['roomtype'] == "true") {
                         $cols = array("Room Department", "Room Number", "Type");
@@ -195,9 +198,7 @@ $db_conn = dbConnect();
                                 $result = executePlainSQL("SELECT R.department, R.room_number FROM Room R, AssignTo A WHERE A.room_department = R.department AND R.room_number = A.room_number AND A.staff_id = $nurseid");
                             }
                             printTable($result, $cols);
-                        } elseif ($nurseid != NULL) {
-                            echo "invalid input... </br>";
-                        }
+                        } 
                     }
       
                 ?>

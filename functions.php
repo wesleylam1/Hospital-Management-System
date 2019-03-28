@@ -96,7 +96,7 @@ function printTable($resultFromSQL, $namesOfColumnsArray)
         echo "</tr>";
     }
     echo "</table>";
-    if ($i == 0 || $resultFromSQL == null) {
+    if ($i == 0) {
         echo "no data found </br>";
     }
 }
