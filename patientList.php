@@ -204,6 +204,9 @@ $db_conn = dbConnect();
                 <h5></br><b>Patient Personal Info Query Result</b></h5>
                 <?php
                     $c = implode(",", $cols);
+                    if ($c == ""){
+                        return;
+                    }
                     $result = NULL;
                     if ($db_conn) {
                         if (array_key_exists('patientlistquery', $_GET)) {
