@@ -248,6 +248,10 @@ INSERT INTO AssignTo
 VALUES (3008, 'Mental Illness', 100);
 INSERT INTO AssignTo
 VALUES (3009, 'Cardiology', 110);
+INSERT INTO AssignTo
+VALUES (3009, 'Elderly Services', 400);
+INSERT INTO AssignTo
+VALUES (3009, 'Nutrition and Dietetics', 300);
     
 DROP TABLE Appointment CASCADE CONSTRAINTS;
 CREATE TABLE Appointment(
