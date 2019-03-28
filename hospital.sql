@@ -179,38 +179,7 @@ VALUES (2007, 'Jennie Wong', '604 876 8544', '1949 Comox St 305, Vancouver, BC V
 INSERT INTO Admin
 VALUES (2008, 'Shamus Menard', '778 895 2133', '1410 Tolmie St, Vancouver, BC V6R 4B3', 'Oncology');
 INSERT INTO Admin
-VALUES (2009, 'Aidan Menard', '778 345 2133', '5980 Battison St, Vancouver, BC V5R 4M8', 'Infection Control');
-	       
-DROP TABLE Maintenance_Record CASCADE CONSTRAINTS;  
-CREATE TABLE Maintenance_Record(
-	record_id INTEGER PRIMARY KEY,
-	record_date DATE NOT NULL,
-	pass CHAR(1) NOT NULL,
-	admin_id INTEGER NOT NULL,
-	equipment_id INTEGER NOT NULL,
-	FOREIGN KEY(equipment_id) REFERENCES Equipment(id) ON DELETE CASCADE,
-	FOREIGN KEY(admin_id) REFERENCES Admin(id) ON DELETE SET NULL);
-
-INSERT INTO Maintenance_Record
-VALUES (1000, DATE '2019-01-01', '1', 2000, 1000);
-INSERT INTO Maintenance_Record
-VALUES (1001, DATE '2019-01-01', '1', 2000, 1001);
-INSERT INTO Maintenance_Record
-VALUES (1002, DATE '2019-01-01', '1', 2001, 1002);
-INSERT INTO Maintenance_Record
-VALUES (1003, DATE '2019-01-01', '0', 2002, 1003);
-INSERT INTO Maintenance_Record
-VALUES (1004, DATE '2019-01-01', '1', 2002, 1002);
-INSERT INTO Maintenance_Record
-VALUES (1005, DATE '2019-02-11', '1', 2007, 1003);
-INSERT INTO Maintenance_Record
-VALUES (1006, DATE '2019-01-11', '1', 2003, 1003);
-INSERT INTO Maintenance_Record
-VALUES (1007, DATE '2019-02-22', '1', 2004, 1001);
-INSERT INTO Maintenance_Record
-VALUES (1008, DATE '2019-03-10', '0', 2005, 1004);
-INSERT INTO Maintenance_Record
-VALUES (1009, DATE '2016-10-14', '1', 2006, 1005);
+VALUES (2009, 'Aidan Menard', '778 345 2133', '5980 Battison St, Vancouver, BC V5R 4M8', 'Infection Control');	 
     
 DROP TABLE Room CASCADE CONSTRAINTS;
 CREATE TABLE Room (
@@ -555,4 +524,36 @@ VALUES ('Citalopram', 0, 1, 7, 9);
 INSERT INTO Prescription
 VALUES ('Tylenol 2', 0, 3, 10, 10);
 
+DROP TABLE Maintenance_Record CASCADE CONSTRAINTS;  
+CREATE TABLE Maintenance_Record(
+	record_id INTEGER PRIMARY KEY,
+	record_date DATE NOT NULL,
+	pass CHAR(1) NOT NULL,
+	admin_id INTEGER NOT NULL,
+	equipment_id INTEGER NOT NULL,
+	FOREIGN KEY(equipment_id) REFERENCES Equipment(id) ON DELETE CASCADE,
+	FOREIGN KEY(admin_id) REFERENCES Admin(id) ON DELETE SET NULL);
+
+INSERT INTO Maintenance_Record
+VALUES (1000, DATE '2019-01-01', '1', 2000, 1000);
+INSERT INTO Maintenance_Record
+VALUES (1001, DATE '2019-01-01', '1', 2000, 1001);
+INSERT INTO Maintenance_Record
+VALUES (1002, DATE '2019-01-01', '1', 2001, 1002);
+INSERT INTO Maintenance_Record
+VALUES (1003, DATE '2019-01-01', '0', 2002, 1003);
+INSERT INTO Maintenance_Record
+VALUES (1004, DATE '2019-01-01', '1', 2002, 1002);
+INSERT INTO Maintenance_Record
+VALUES (1005, DATE '2019-02-11', '1', 2007, 1003);
+INSERT INTO Maintenance_Record
+VALUES (1006, DATE '2019-01-11', '1', 2003, 1003);
+INSERT INTO Maintenance_Record
+VALUES (1007, DATE '2019-02-22', '1', 2004, 1001);
+INSERT INTO Maintenance_Record
+VALUES (1008, DATE '2019-03-10', '0', 2005, 1004);
+INSERT INTO Maintenance_Record
+VALUES (1009, DATE '2016-10-14', '1', 2006, 1005);									
+									
+									
 commit;
