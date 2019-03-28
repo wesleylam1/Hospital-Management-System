@@ -201,6 +201,9 @@ $db_conn = dbConnect();
                 <?php
                     $cols1 = array("Date", "Medical Notes", "Drug Name", "Refills", "Dosage", "Duration (days)", "Total Amount", "Drug Price");
                     $result1 = NULL;
+                    if ($pid == null){
+                        return;
+                    }
                     if ($db_conn) {
                         if (array_key_exists('patientquery', $_GET)) {
                             $result1 = executePlainSQL("SELECT th.treatment_date, th.medical_notes, p.drug_name, p.refills, p.dosage, p.duration_days, p1.total_amount, p1.price FROM Prescription p
