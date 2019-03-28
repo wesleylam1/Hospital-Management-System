@@ -197,7 +197,7 @@ $db_conn = dbConnect();
                 <p><font size="3" color=black>The table summarizes the number of disease for each patient.</p>
                 <?php
                     if ($db_conn) {
-                        $table2 = executePlainSQL("SELECT p.id, count(disease_name) FROM Has_Disease RIGHT OUTER JOIN patient p ON p.id = Has_Disease.patient_id GROUP BY p.id ");
+                        $table2 = executePlainSQL("SELECT p.id, count(disease_name) FROM Has_Disease RIGHT OUTER JOIN patient p ON p.id = Has_Disease.patient_id GROUP BY p.id ORDER BY p.id");
                         printTable($table2, array("Patient ID", "Count"));
                     }
                 ?>
